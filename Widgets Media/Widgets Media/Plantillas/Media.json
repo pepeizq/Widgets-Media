@@ -1,0 +1,16 @@
+﻿{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.6",
+    "enlace": "test",
+    "argumentos": "test",
+    "backgroundImage": {
+        "url": "https://cdn.cloudflare.steamstatic.com/steam/apps/1659420/library_600x900.jpg?t=1607372117",
+        "horizontalAlignment": "Center",
+        "verticalAlignment": "Center"
+    },
+    "selectAction": {
+        "type": "Action.Execute",
+        "verb": "AbrirMedia"
+    }
+}
