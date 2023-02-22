@@ -11,6 +11,9 @@
     <SupportedOSPlatformVersion>10.0.22621.0</SupportedOSPlatformVersion>
     <DefineConstants>$(DefineConstants);DISABLE_XAML_GENERATED_MAIN</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="MainWindow.xaml~RF46d4a7b7.TMP" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.WinUI.Notifications" Version="7.1.2" />
@@ -20,6 +23,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230118.102" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="SpotifyAPI.Web" Version="7.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

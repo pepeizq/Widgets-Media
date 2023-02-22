@@ -117,14 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AnyGame" xml:space="preserve">
-    <value>Cualquier Juego</value>
+  <data name="AnyMedia" xml:space="preserve">
+    <value>Cualquier Streaming</value>
   </data>
   <data name="Arguments.Text" xml:space="preserve">
     <value>Argumentos</value>
-  </data>
-  <data name="BattlenetInstalledGamesMessage.Text" xml:space="preserve">
-    <value>Recuerda, para ejecutar el juego desde Widgets debes tenerlo instalado en la aplicación de Battle.net.</value>
   </data>
   <data name="Bottom.Text" xml:space="preserve">
     <value>Abajo</value>
@@ -222,20 +219,8 @@
   <data name="Right.Text" xml:space="preserve">
     <value>Derecha</value>
   </data>
-  <data name="SelectFolderInstalledGames.Text" xml:space="preserve">
-    <value>Selecciona la carpeta donde tengas instalados los juegos:</value>
-  </data>
-  <data name="SteamAnyGames.Text" xml:space="preserve">
-    <value>Cualquier juego</value>
-  </data>
-  <data name="SteamAnyGamesMessage.Text" xml:space="preserve">
-    <value>Introduce el enlace de cualquier juego en Steam:</value>
-  </data>
-  <data name="SteamAnyGamesMessage2.Text" xml:space="preserve">
-    <value>Recuerda, para ejecutarlo desde Widgets debes tener el juego en Steam.</value>
-  </data>
-  <data name="SteamInstalledGames.Text" xml:space="preserve">
-    <value>Juegos instalados</value>
+  <data name="SpotifyOptions.Text" xml:space="preserve">
+    <value>Debido a las restricciones en la API de Spotify, si quieres añadir un widget de esta plataforma debéis crear en la sección de desarrolladores una aplicación:</value>
   </data>
   <data name="StoreDescription" xml:space="preserve">
     <value>Añade widgets para tus juegos de de Steam en la app Widgets de Windows 11.

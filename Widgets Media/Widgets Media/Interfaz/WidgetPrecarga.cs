@@ -163,7 +163,7 @@ namespace Interfaz
             }
         }
 
-        public static void PrecargarJuego(string nombre, string ejecutable, string argumentos, string imagenPequeña, string imagenMedianaGrande)
+        public static void PrecargarMedia(string nombre, string ejecutable, string argumentos, string imagenPequeña, string imagenMedianaGrande)
         {
             Pestañas.Visibilidad(ObjetosVentana.gridWidgetPrecarga, true, null, false);
             BarraTitulo.CambiarTitulo(null);
@@ -273,7 +273,7 @@ namespace Interfaz
 
             //------------------------------------------------
 
-            Ficheros.EscribirFichero("Juego.json", JsonSerializer.Serialize(json));
+            Ficheros.EscribirFichero("Media.json", JsonSerializer.Serialize(json));
 
             ObjetosVentana.tbWidgetCargarJuegoMensaje.Visibility = Visibility.Visible;
             ResourceLoader recursos = new ResourceLoader();

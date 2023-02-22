@@ -20,7 +20,7 @@ namespace Widgets_Media
             ScrollViewers.Cargar();
             Interfaz.Menu.Cargar();
             Trial.Cargar();
-
+            Plataformas.Spotify.Cargar();
             WidgetPrecarga.Cargar();
             Opciones.CargarDatos();
 
@@ -41,13 +41,7 @@ namespace Widgets_Media
             //-------------------------------------------------------------------
 
             ObjetosVentana.gridPresentacion = gridPresentacion;
-            ObjetosVentana.gridSteam = gridSteam;
-            ObjetosVentana.gridGOG = gridGOG;
-            ObjetosVentana.gridEAPlay = gridEAPlay;
-            ObjetosVentana.gridUbisoft = gridUbisoft;
-            ObjetosVentana.gridBattlenet = gridBattlenet;
-            ObjetosVentana.gridAmazon = gridAmazon;
-            ObjetosVentana.gridEpicGames = gridEpicGames;
+            ObjetosVentana.gridSpotify = gridSpotify;
             ObjetosVentana.gridWidgetPrecarga = gridWidgetPrecarga;
             ObjetosVentana.gridOpciones = gridOpciones;
 
@@ -60,13 +54,11 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
-            ObjetosVentana.expanderEpicGamesJuegosNoBBDD = expanderEpicGamesJuegosNoBBDD;
-            ObjetosVentana.tbEpicGamesJuegosNoBBDDIds = tbEpicGamesJuegosNoBBDDIds;
-            ObjetosVentana.botonEpicGamesJuegosNoBBDDContactar = botonEpicGamesJuegosNoBBDDContactar;
-            ObjetosVentana.svEpicGamesJuegosInstalados = svEpicGamesJuegosInstalados;
-            ObjetosVentana.prEpicGamesJuegosInstalados = prEpicGamesJuegosInstalados;
-            ObjetosVentana.gvEpicGamesJuegosInstalados = gvEpicGamesJuegosInstalados;
-            ObjetosVentana.tbEpicGamesMensajeNoJuegos = tbEpicGamesMensajeNoJuegos;
+            ObjetosVentana.botonSpotifyBuscar = botonSpotifyBuscar;
+            ObjetosVentana.tbSpotifyBuscar = tbSpotifyBuscar;
+            ObjetosVentana.svSpotifyResultados = svSpotifyResultados;
+            ObjetosVentana.prSpotifyResultados = prSpotifyResultados;
+            ObjetosVentana.gvSpotifyResultados = gvSpotifyResultados;
 
             //-------------------------------------------------------------------
 
@@ -108,13 +100,7 @@ namespace Widgets_Media
             //-------------------------------------------------------------------
 
             public static Grid gridPresentacion { get; set; }
-            public static Grid gridSteam { get; set; }
-            public static Grid gridGOG { get; set; }
-            public static Grid gridEAPlay { get; set; }
-            public static Grid gridUbisoft { get; set; }
-            public static Grid gridBattlenet { get; set; }
-            public static Grid gridAmazon { get; set; }
-            public static Grid gridEpicGames { get; set; }
+            public static Grid gridSpotify { get; set; }
             public static Grid gridWidgetPrecarga { get; set; }
             public static Grid gridOpciones { get; set; }
 
@@ -127,65 +113,11 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
-            public static Button botonSteamJuegosInstalados { get; set; }
-            public static Button botonSteamCualquierJuego { get; set; }
-            public static Grid gridSteamJuegosInstalados { get; set; }
-            public static ScrollViewer svSteamJuegosInstalados { get; set; }
-            public static ProgressRing prSteamJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvSteamJuegosInstalados { get; set; }
-            public static Grid gridSteamCualquierJuego { get; set; }
-            public static TextBox tbSteamCualquierJuego { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static ScrollViewer svGOGJuegosInstalados { get; set; }
-            public static ProgressRing prGOGJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvGOGJuegosInstalados { get; set; }
-            public static TextBlock tbGOGMensajeNoJuegos { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static Button botonEAPlayBuscarJuegosInstalados { get; set; }
-            public static TextBlock tbEAPlayCarpetaJuegosInstalados { get; set; }
-            public static ScrollViewer svEAPlayJuegosInstalados { get; set; }
-            public static ProgressRing prEAPlayJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvEAPlayJuegosInstalados { get; set; }
-            public static TextBlock tbEAPlayMensajeNoJuegos { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static Microsoft.UI.Xaml.Controls.Expander expanderUbisoftJuegosNoBBDD { get; set; }
-            public static TextBox tbUbisoftJuegosNoBBDDIds { get; set; }
-            public static Button botonUbisoftJuegosNoBBDDContactar { get; set; }
-            public static ScrollViewer svUbisoftJuegosInstalados { get; set; }
-            public static ProgressRing prUbisoftJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvUbisoftJuegosInstalados { get; set; }
-            public static TextBlock tbUbisoftMensajeNoJuegos { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static StackPanel spBattlenetJuegosInstaladosMensaje { get; set; }
-            public static ScrollViewer svBattlenetJuegosInstalados { get; set; }
-            public static ProgressRing prBattlenetJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvBattlenetJuegosInstalados { get; set; }
-            public static TextBlock tbBattlenetMensajeNoJuegos { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static ScrollViewer svAmazonJuegosInstalados { get; set; }
-            public static ProgressRing prAmazonJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvAmazonJuegosInstalados { get; set; }
-            public static TextBlock tbAmazonMensajeNoJuegos { get; set; }
-
-            //-------------------------------------------------------------------
-
-            public static Microsoft.UI.Xaml.Controls.Expander expanderEpicGamesJuegosNoBBDD { get; set; }
-            public static TextBox tbEpicGamesJuegosNoBBDDIds { get; set; }
-            public static Button botonEpicGamesJuegosNoBBDDContactar { get; set; }
-            public static ScrollViewer svEpicGamesJuegosInstalados { get; set; }
-            public static ProgressRing prEpicGamesJuegosInstalados { get; set; }
-            public static AdaptiveGridView gvEpicGamesJuegosInstalados { get; set; }
-            public static TextBlock tbEpicGamesMensajeNoJuegos { get; set; }
+            public static Button botonSpotifyBuscar { get; set; }
+            public static TextBox tbSpotifyBuscar { get; set; }
+            public static ScrollViewer svSpotifyResultados { get; set; }
+            public static ProgressRing prSpotifyResultados { get; set; }
+            public static AdaptiveGridView gvSpotifyResultados { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -217,17 +149,17 @@ namespace Widgets_Media
         {
             ResourceLoader recursos = new ResourceLoader();
 
-            Pestañas.CreadorItems("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyGame"));
-            Pestañas.CreadorItems("/Assets/Plataformas/logo_epicgames.png", "Epic Games");
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyMedia"));
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_spotify.png", "Spotify");
 
             //----------------------------------------------------------
 
-            GridViewItem itemEpicGames = Presentacion.CreadorBotones("/Assets/Plataformas/logo_epicgames.png", "Epic Games", false);
-            Button2 botonEpicGames = itemEpicGames.Content as Button2;
-            botonEpicGames.Click += AbrirEpicGamesClick;
-            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemEpicGames);
+            GridViewItem itemSpotify = Presentacion.CreadorBotones("/Assets/Plataformas/logo_spotify_completo.png", "Spotify", false);
+            Button2 botonSpotify = itemSpotify.Content as Button2;
+            botonSpotify.Click += AbrirSpotifyClick;
+            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemSpotify);
 
-            GridViewItem itemCualquierJuego = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyGame"), true);
+            GridViewItem itemCualquierJuego = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyMedia"), true);
             Button2 botonCualquierJuego = itemCualquierJuego.Content as Button2;
             botonCualquierJuego.Click += AbrirCualquierJuegoClick;
             ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemCualquierJuego);
@@ -268,18 +200,17 @@ namespace Widgets_Media
                         {
                             TextBlock tb = sp.Children[1] as TextBlock;
 
-                            if (tb.Text == "Epic Games")
+                            if (tb.Text == "Spotify")
                             {
-                                Pestañas.Visibilidad(gridEpicGames, true, sp, true);
+                                Pestañas.Visibilidad(gridSpotify, true, sp, true);
                                 BarraTitulo.CambiarTitulo(null);
-                                ScrollViewers.EnseñarSubir(svEpicGamesJuegosInstalados);
-                                //EpicGames.CargarJuegosInstalados();
+                                ScrollViewers.EnseñarSubir(svSpotifyResultados);
                             }
                             else if (tb.Text == recursos.GetString("AnyGame"))
                             {
                                 Pestañas.Visibilidad(gridWidgetPrecarga, true, null, false);
                                 BarraTitulo.CambiarTitulo(null);
-                                WidgetPrecarga.PrecargarJuego(null, null, null, null, null);
+                                WidgetPrecarga.PrecargarMedia(null, null, null, null, null);
                             }
                         }
                     }
@@ -287,20 +218,19 @@ namespace Widgets_Media
             }
         }
 
-        private void AbrirEpicGamesClick(object sender, RoutedEventArgs e)
+        private void AbrirSpotifyClick(object sender, RoutedEventArgs e)
         {
-            StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[7];
-            Pestañas.Visibilidad(gridEpicGames, true, sp, true);
+            StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[1];
+            Pestañas.Visibilidad(gridSpotify, true, sp, true);
             BarraTitulo.CambiarTitulo(null);
-            ScrollViewers.EnseñarSubir(svEpicGamesJuegosInstalados);
-            
+            ScrollViewers.EnseñarSubir(svSpotifyResultados);       
         }
 
         private void AbrirCualquierJuegoClick(object sender, RoutedEventArgs e)
         {
             Pestañas.Visibilidad(gridWidgetPrecarga, true, null, false);
             BarraTitulo.CambiarTitulo(null);
-            WidgetPrecarga.PrecargarJuego(null, null, null, null, null);
+            WidgetPrecarga.PrecargarMedia(null, null, null, null, null);
         }
     }
 }

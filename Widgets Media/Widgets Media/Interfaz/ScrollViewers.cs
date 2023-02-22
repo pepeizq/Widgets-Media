@@ -15,7 +15,7 @@ namespace Interfaz
             ObjetosVentana.nvItemSubirArriba.PointerExited += Animaciones.SaleRatonNvItem2;
 
             ObjetosVentana.svPresentacion.ViewChanging += svScroll;
-            ObjetosVentana.svEpicGamesJuegosInstalados.ViewChanging += svScroll;
+            ObjetosVentana.svSpotifyResultados.ViewChanging += svScroll;
             ObjetosVentana.svWidgetPrecarga.ViewChanging += svScroll;
             ObjetosVentana.svOpciones.ViewChanging += svScroll;
         }
@@ -42,9 +42,9 @@ namespace Interfaz
             Grid grid = nvItem.Content as Grid;
             grid.Background = new SolidColorBrush(Colors.Transparent);
 
-            if (ObjetosVentana.gridEpicGames.Visibility == Visibility.Visible)
+            if (ObjetosVentana.gridSpotify.Visibility == Visibility.Visible)
             {
-                ObjetosVentana.svEpicGamesJuegosInstalados.ChangeView(null, 0, null);
+                ObjetosVentana.svSpotifyResultados.ChangeView(null, 0, null);
             }
             else if (ObjetosVentana.gridWidgetPrecarga.Visibility == Visibility.Visible)
             {

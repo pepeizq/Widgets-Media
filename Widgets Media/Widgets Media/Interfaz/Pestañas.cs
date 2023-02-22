@@ -60,13 +60,7 @@ namespace Interfaz
 
             ObjetosVentana.nvPrincipal.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridPresentacion.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridSteam.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridGOG.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridEAPlay.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridUbisoft.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridBattlenet.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridAmazon.Visibility = Visibility.Collapsed;
-            ObjetosVentana.gridEpicGames.Visibility = Visibility.Collapsed;
+            ObjetosVentana.gridSpotify.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridWidgetPrecarga.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridOpciones.Visibility = Visibility.Collapsed;
 
