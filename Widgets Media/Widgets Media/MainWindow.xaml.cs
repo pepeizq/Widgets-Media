@@ -54,11 +54,18 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
+            ObjetosVentana.gridSpotifyBuscador = gridSpotifyBuscador;
+            ObjetosVentana.cbSpotifyTipoBuscar = cbSpotifyTipoBuscar;
             ObjetosVentana.botonSpotifyBuscar = botonSpotifyBuscar;
             ObjetosVentana.tbSpotifyBuscar = tbSpotifyBuscar;
             ObjetosVentana.svSpotifyResultados = svSpotifyResultados;
             ObjetosVentana.prSpotifyResultados = prSpotifyResultados;
             ObjetosVentana.gvSpotifyResultados = gvSpotifyResultados;
+            ObjetosVentana.gridSpotifyMensajeOpciones = gridSpotifyMensajeOpciones;
+            ObjetosVentana.botonSpotifyIrOpciones = botonSpotifyIrOpciones;
+            ObjetosVentana.botonOpcionesSpotifyAbrirAyuda = botonOpcionesSpotifyAbrirAyuda;
+            ObjetosVentana.tbOpcionesSpotifyClienteID = tbOpcionesSpotifyClienteID;
+            ObjetosVentana.tbOpcionesSpotifyClienteSecreto = tbOpcionesSpotifyClienteSecreto;
 
             //-------------------------------------------------------------------
 
@@ -113,11 +120,18 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
+            public static Grid gridSpotifyBuscador { get; set; }
+            public static ComboBox cbSpotifyTipoBuscar { get; set; }
             public static Button botonSpotifyBuscar { get; set; }
             public static TextBox tbSpotifyBuscar { get; set; }
             public static ScrollViewer svSpotifyResultados { get; set; }
             public static ProgressRing prSpotifyResultados { get; set; }
             public static AdaptiveGridView gvSpotifyResultados { get; set; }
+            public static Grid gridSpotifyMensajeOpciones { get; set; }
+            public static Button botonSpotifyIrOpciones { get; set; }
+            public static Button botonOpcionesSpotifyAbrirAyuda { get; set; }
+            public static TextBox tbOpcionesSpotifyClienteID { get; set; }
+            public static TextBox tbOpcionesSpotifyClienteSecreto { get; set; }
 
             //-------------------------------------------------------------------
 

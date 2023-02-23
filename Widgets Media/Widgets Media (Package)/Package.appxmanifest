@@ -3,17 +3,19 @@
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-  IgnorableNamespaces="uap rescap">
+  IgnorableNamespaces="uap uap3 rescap">
 
   <Identity
-    Name="c38440f8-8fc5-4786-b098-607fd65a1fd7"
-    Publisher="CN=pepei"
+    Name="12041pepeizq.pepeizqsWidgetsforStreaming"
+    Publisher="CN=E6A59F16-60E0-4B88-A8A1-993C16A63CD0"
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>Widgets Media (Package)</DisplayName>
-    <PublisherDisplayName>pepei</PublisherDisplayName>
+    <DisplayName>pepeizq&apos;s Widgets for Streaming</DisplayName>
+    <PublisherDisplayName>pepeizq</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
@@ -31,14 +33,66 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="Widgets Media (Package)"
-        Description="Widgets Media (Package)"
+        DisplayName="pepeizq&apos;s Widgets for Streaming"
+        Description="https://pepeizqapps.com/"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
         <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
+
+		<Extensions>
+			<com:Extension Category="windows.comServer">
+				<com:ComServer>
+					<com:ExeServer Executable="Widgets Media\Widgets Media.exe" Arguments="-RegisterProcessAsComServer" DisplayName="WidgetStreaming">
+						<com:Class Id="B346D60C-42FC-4D9F-AB57-DC263E64F243" DisplayName="WidgetStreaming" />
+					</com:ExeServer>
+				</com:ComServer>
+			</com:Extension>
+			<uap3:Extension Category="windows.appExtension">
+				<uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="pepeizq&apos;s Widgets for Streaming" Id="WidgetsStreaming" PublicFolder="Public">
+					<uap3:Properties>
+						<WidgetProvider>
+							<ProviderIcons>
+								<Icon Path="Images\Logos\Square44x44Logo.scale-100.png" />
+							</ProviderIcons>
+							<Activation>
+								<CreateInstance ClassId="B346D60C-42FC-4D9F-AB57-DC263E64F243" />
+							</Activation>
+							<Definitions>
+								<Definition Id="Media"
+									DisplayName="pepeizq&apos;s Widgets for Streaming"
+									Description="Widget Streaming Description">
+									<Capabilities>
+										<Capability>
+											<Size Name="small" />
+										</Capability>
+										<Capability>
+											<Size Name="medium" />
+										</Capability>
+										<Capability>
+											<Size Name="large" />
+										</Capability>
+									</Capabilities>
+									<ThemeResources>
+										<Icons>
+											<Icon Path="Images\Logos\Square44x44Logo.scale-100.png" />
+										</Icons>
+										<Screenshots>
+											<Screenshot Path="ProviderAssets\Counting_Screenshot.png" DisplayAltText="For accessibility" />
+										</Screenshots>
+										<!-- DarkMode and LightMode are optional -->
+										<DarkMode />
+										<LightMode />
+									</ThemeResources>
+								</Definition>
+							</Definitions>
+						</WidgetProvider>
+					</uap3:Properties>
+				</uap3:AppExtension>
+			</uap3:Extension>
+		</Extensions>
     </Application>
   </Applications>
 

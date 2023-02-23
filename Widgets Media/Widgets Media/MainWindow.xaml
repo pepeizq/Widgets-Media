@@ -128,24 +128,36 @@
                 </Grid>
 
                 <Grid x:Name="gridSpotify" Visibility="Collapsed">
-                    <Grid>
+                    <Grid x:Name="gridSpotifyBuscador" Visibility="Collapsed">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <interfaz:Button2 x:Name="botonSpotifyBuscar" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5">
+                        <Grid Grid.Row="0" Margin="20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <interfaz:ComboBox2 x:Name="cbSpotifyTipoBuscar" Grid.Column="0" SelectedIndex="0" Width="150" RequestedTheme="Dark" CornerRadius="5" VerticalAlignment="Center">
+                                <TextBlock Text="Albums"/>
+                                <TextBlock Text="Playlists"/>
+                                <TextBlock Text="Tracks"/>
+                            </interfaz:ComboBox2>
+
+                            <interfaz:Button2 x:Name="botonSpotifyBuscar" Grid.Column="1" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="20,0">
                                 <interfaz:Button2.Content>
                                     <StackPanel Orientation="Horizontal">
-                                        <iconos:FontAwesome Icon="Solid_Trash" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
-                                        <TextBlock x:Uid="OptionsAppCleanButton" Foreground="{StaticResource ColorFuente}" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                        <iconos:FontAwesome Icon="Solid_MagnifyingGlass" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
+                                        <TextBlock x:Uid="Search" Foreground="{StaticResource ColorFuente}" Margin="15,0,0,0" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </interfaz:Button2.Content>
                             </interfaz:Button2>
 
-                            <TextBox x:Name="tbSpotifyBuscar" RequestedTheme="Dark"/>
-                        </StackPanel>
+                            <TextBox x:Name="tbSpotifyBuscar" Grid.Column="2" RequestedTheme="Dark" VerticalAlignment="Center"/>
+                        </Grid>
 
                         <ScrollViewer x:Name="svSpotifyResultados" Grid.Row="1" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                             <StackPanel Orientation="Vertical">
@@ -154,6 +166,20 @@
                                 <controls:AdaptiveGridView x:Name="gvSpotifyResultados" DesiredWidth="250" Padding="20" StretchContentForSingleRow="False"/>
                             </StackPanel>
                         </ScrollViewer>
+                    </Grid>
+
+                    <Grid x:Name="gridSpotifyMensajeOpciones">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock x:Uid="SpotifyGoOptions" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap"/>
+
+                            <interfaz:Button2 x:Name="botonSpotifyIrOpciones" Background="{StaticResource ColorPrimario}" RequestedTheme="Light" Padding="15" CornerRadius="5" HorizontalAlignment="Center" Margin="0,30,0,0">
+                                <interfaz:Button2.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Uid="SpotifyGoOptions2" Foreground="{StaticResource ColorFuente}"/>
+                                    </StackPanel>
+                                </interfaz:Button2.Content>
+                            </interfaz:Button2>
+                        </StackPanel>
                     </Grid>
                 </Grid>
 
@@ -302,9 +328,15 @@
                                 </Expander.Background>
 
                                 <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="SpotifyOptions" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,15"/>
+                                    <TextBlock x:Uid="SpotifyOptions" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
 
-                                    
+                                    <interfaz:Button2 x:Name="botonOpcionesSpotifyAbrirAyuda" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="0,0,0,20">
+                                        <interfaz:Button2.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Uid="SpotifyOptionsHelp" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </interfaz:Button2.Content>
+                                    </interfaz:Button2>
                                     
                                     <Grid Margin="0,0,0,20">
                                         <Grid.ColumnDefinitions>

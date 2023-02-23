@@ -16,6 +16,9 @@
             <Color x:Key="ColorTrialFuente">#00376c</Color>
             <Color x:Key="ColorTrialFondo">#80c0ff</Color>
             <Color x:Key="ColorTrialBoton">#001932</Color>
+
+            <x:Double x:Key="ContentDialogMaxWidth">1280</x:Double>
+            <x:Double x:Key="ContentDialogMaxHeight">720</x:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

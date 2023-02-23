@@ -138,6 +138,9 @@
   <data name="ChooseImageSmall" xml:space="preserve">
     <value>La imagen pequeña se adapta mejor al widget de tamaño pequeño.</value>
   </data>
+  <data name="Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
   <data name="Contact.Text" xml:space="preserve">
     <value>Contactar</value>
   </data>
@@ -219,8 +222,23 @@
   <data name="Right.Text" xml:space="preserve">
     <value>Derecha</value>
   </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="SpotifyGoOptions.Text" xml:space="preserve">
+    <value>Si quieres añadir Widgets de tus albums o playlists de Spotify, debes ir a Opciones y seguir las instrucciones para configurarlo.</value>
+  </data>
+  <data name="SpotifyGoOptions2.Text" xml:space="preserve">
+    <value>Ir a Opciones</value>
+  </data>
   <data name="SpotifyOptions.Text" xml:space="preserve">
     <value>Debido a las restricciones en la API de Spotify, si quieres añadir un widget de esta plataforma debéis crear en la sección de desarrolladores una aplicación:</value>
+  </data>
+  <data name="SpotifyOptionsHelp.Text" xml:space="preserve">
+    <value>Mostrar donde se hace</value>
+  </data>
+  <data name="SpotifyOptionsOpenLink" xml:space="preserve">
+    <value>Abrir Enlace a Desarrolladores de Spotify</value>
   </data>
   <data name="StoreDescription" xml:space="preserve">
     <value>Añade widgets para tus juegos de de Steam en la app Widgets de Windows 11.
