@@ -177,15 +177,6 @@
   <data name="MenuRate" xml:space="preserve">
     <value>Rate the App</value>
   </data>
-  <data name="NoGamesBBDDMessage1.Text" xml:space="preserve">
-    <value>There are games that you have installed and have not been detected by the app.</value>
-  </data>
-  <data name="NoGamesBBDDMessage2.Text" xml:space="preserve">
-    <value>If you want to help with the app, you can contact with the developer saying what games and ids are missing.</value>
-  </data>
-  <data name="NoGamesDetected.Text" xml:space="preserve">
-    <value>No Games Detected</value>
-  </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
@@ -217,13 +208,19 @@
     <value>Select the language of the application, a restart is necessary in the application to make the change.</value>
   </data>
   <data name="PresentationMessage.Text" xml:space="preserve">
-    <value>Select the platform where you have the game to add as a widget:</value>
+    <value>Select the streaming you want to add as a widget::</value>
   </data>
   <data name="Right.Text" xml:space="preserve">
     <value>Right</value>
   </data>
   <data name="Search.Text" xml:space="preserve">
     <value>Search</value>
+  </data>
+  <data name="SpotifyAlbums.Text" xml:space="preserve">
+    <value>Albums</value>
+  </data>
+  <data name="SpotifyArtists.Text" xml:space="preserve">
+    <value>Artists</value>
   </data>
   <data name="SpotifyGoOptions.Text" xml:space="preserve">
     <value>If you want to add Widgets from your Spotify albums or playlists, you must go to Options and follow the instructions to configure it.</value>
@@ -240,10 +237,8 @@
   <data name="SpotifyOptionsOpenLink" xml:space="preserve">
     <value>Open Link to Spotify Developers</value>
   </data>
-  <data name="StoreDescription" xml:space="preserve">
-    <value>Add widgets from your Steam games to the Windows 11 Widgets app. 
-
-Once you've added a game widget you can run it from the Widget app.</value>
+  <data name="SpotifyPlaylists.Text" xml:space="preserve">
+    <value>Playlists</value>
   </data>
   <data name="Top.Text" xml:space="preserve">
     <value>Top</value>
@@ -263,10 +258,10 @@ Once you've added a game widget you can run it from the Widget app.</value>
   <data name="WidgetImageOrientationVertical.Text" xml:space="preserve">
     <value>Vertical</value>
   </data>
-  <data name="WidgetLoadGame.Text" xml:space="preserve">
-    <value>Load game in app Widgets</value>
+  <data name="WidgetLoadStreaming.Text" xml:space="preserve">
+    <value>Load streaming in app Widgets</value>
   </data>
-  <data name="WidgetLoadGameMessage" xml:space="preserve">
-    <value>Game widget loaded, open the Widgets app and add the game widget from 'Add Widgets'.</value>
+  <data name="WidgetLoadStreamingMessage" xml:space="preserve">
+    <value>Streaming widget loaded, open the Widgets app and add the streaming widget from 'Add Widgets'.</value>
   </data>
 </root>

@@ -12,7 +12,7 @@ namespace Interfaz
     {
         public static void Cargar()
         {
-            ObjetosVentana.tbWidgetPrecargaEjecutable.TextChanged += ActivarBotonCargaJuego;
+            ObjetosVentana.tbWidgetPrecargaEjecutable.TextChanged += ActivarBotonCargaStreaming;
             ObjetosVentana.tbWidgetPrecargaImagenPequeña.TextChanged += ActualizarImagenPequeña;
             ObjetosVentana.tbWidgetPrecargaImagenGrande.TextChanged += ActualizarImagenGrande;
 
@@ -26,19 +26,19 @@ namespace Interfaz
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.PointerEntered += Animaciones.EntraRatonComboCaja2;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.PointerExited += Animaciones.SaleRatonComboCaja2;
 
-            ObjetosVentana.botonWidgetPrecargaCargarJuego.Click += CargarMedia;
-            ObjetosVentana.botonWidgetPrecargaCargarJuego.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonWidgetPrecargaCargarJuego.PointerExited += Animaciones.SaleRatonBoton2;
+            ObjetosVentana.botonWidgetPrecargaCargarStreaming.Click += CargarMedia;
+            ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerEntered += Animaciones.EntraRatonBoton2;
+            ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerExited += Animaciones.SaleRatonBoton2;
         }
 
-        private static void ActivarBotonCargaJuego(object sender, TextChangedEventArgs e)
+        private static void ActivarBotonCargaStreaming(object sender, TextChangedEventArgs e)
         {
-            ActivarBotonCargaJuego();
+            ActivarBotonCargaStreaming();
         }
 
         private static void ActualizarImagenPequeña(object sender, TextChangedEventArgs e)
         {
-            ActivarBotonCargaJuego();
+            ActivarBotonCargaStreaming();
 
             if (ObjetosVentana.cbWidgetPrecargaImagen.SelectedIndex == 0)
             {
@@ -48,7 +48,7 @@ namespace Interfaz
 
         private static void ActualizarImagenGrande(object sender, TextChangedEventArgs e)
         {
-            ActivarBotonCargaJuego();
+            ActivarBotonCargaStreaming();
 
             if (ObjetosVentana.cbWidgetPrecargaImagen.SelectedIndex == 1)
             {
@@ -56,7 +56,7 @@ namespace Interfaz
             }
         }
 
-        private static async void ActivarBotonCargaJuego()
+        private static async void ActivarBotonCargaStreaming()
         {
             bool activar1 = false;
             bool activar2 = false;
@@ -107,31 +107,31 @@ namespace Interfaz
             {
                 if (activar2 == true || activar3 == true)
                 {
-                    ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled = true;
+                    ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = true;
                 }
                 else
                 {
-                    ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled = false;
+                    ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = false;
                 }               
             }
             else
             {
-                ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled = false;
+                ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = false;
             }
 
             //-----------------------------------------------------
 
-            if (ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled == true)
+            if (ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled == true)
             {
                 if (await Trial.Detectar() == true)
                 {
                     if (await Ficheros.LeerCantidadFicheros() < 1)
                     {
-                        ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled = true;
+                        ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = true;
                     }
                     else
                     {
-                        ObjetosVentana.botonWidgetPrecargaCargarJuego.IsEnabled = false;
+                        ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = false;
                     }
                 }
             }
@@ -185,7 +185,7 @@ namespace Interfaz
             ObjetosVentana.tbWidgetPrecargaImagenPequeña.Text = imagenPequeña;
             ObjetosVentana.tbWidgetPrecargaImagenGrande.Text = imagenMedianaGrande;
 
-            ActivarBotonCargaJuego();
+            ActivarBotonCargaStreaming();
 
             if (imagenPequeña == string.Empty && imagenMedianaGrande != string.Empty)
             {
@@ -201,7 +201,7 @@ namespace Interfaz
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionHorizontal.SelectedIndex = 1;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.SelectedIndex = 1;
 
-            ObjetosVentana.tbWidgetCargarJuegoMensaje.Visibility = Visibility.Collapsed;
+            ObjetosVentana.tbWidgetCargarStreamingMensaje.Visibility = Visibility.Collapsed;
         }
 
         public static void CargarMedia(object sender, RoutedEventArgs e)
@@ -275,11 +275,11 @@ namespace Interfaz
 
             Ficheros.EscribirFichero("Media.json", JsonSerializer.Serialize(json));
 
-            ObjetosVentana.tbWidgetCargarJuegoMensaje.Visibility = Visibility.Visible;
+            ObjetosVentana.tbWidgetCargarStreamingMensaje.Visibility = Visibility.Visible;
             ResourceLoader recursos = new ResourceLoader();
-            ObjetosVentana.tbWidgetCargarJuegoMensaje.Text = recursos.GetString("WidgetLoadGameMessage");
+            ObjetosVentana.tbWidgetCargarStreamingMensaje.Text = recursos.GetString("WidgetLoadStreamingMessage");
 
-            ActivarBotonCargaJuego();
+            ActivarBotonCargaStreaming();
 
             ActivarDesactivar(true);
         }

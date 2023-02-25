@@ -127,6 +127,39 @@
                     </ScrollViewer>
                 </Grid>
 
+                <Grid x:Name="gridNetflix" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <interfaz:Button2 x:Name="botonNetflixBuscar" Grid.Column="0" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="20,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <iconos:FontAwesome Icon="Solid_MagnifyingGlass" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
+                                    <TextBlock x:Uid="Search" Foreground="{StaticResource ColorFuente}" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+
+                        <TextBox x:Name="tbNetflixBuscar" Grid.Column="1" RequestedTheme="Dark" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <ScrollViewer x:Name="svNetflixResultados" Grid.Row="1" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical">
+                            <ProgressRing x:Name="prNetflixResultados" IsIndeterminate="True" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Margin="30"/>
+
+                            <controls:AdaptiveGridView x:Name="gvNetflixResultados" DesiredWidth="250" Padding="20" StretchContentForSingleRow="False"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
                 <Grid x:Name="gridSpotify" Visibility="Collapsed">
                     <Grid x:Name="gridSpotifyBuscador" Visibility="Collapsed">
                         <Grid.RowDefinitions>
@@ -142,9 +175,9 @@
                             </Grid.ColumnDefinitions>
 
                             <interfaz:ComboBox2 x:Name="cbSpotifyTipoBuscar" Grid.Column="0" SelectedIndex="0" Width="150" RequestedTheme="Dark" CornerRadius="5" VerticalAlignment="Center">
-                                <TextBlock Text="Albums"/>
-                                <TextBlock Text="Playlists"/>
-                                <TextBlock Text="Tracks"/>
+                                <TextBlock x:Uid="SpotifyAlbums"/>
+                                <TextBlock x:Uid="SpotifyPlaylists"/>
+                                <TextBlock x:Uid="SpotifyArtists"/>
                             </interfaz:ComboBox2>
 
                             <interfaz:Button2 x:Name="botonSpotifyBuscar" Grid.Column="1" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="20,0">
@@ -301,15 +334,15 @@
                                     <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
                                 </StackPanel.Background>
 
-                                <interfaz:Button2 x:Name="botonWidgetPrecargaCargarJuego" Background="{StaticResource ColorPrimario}" RequestedTheme="Light" Padding="15" IsEnabled="False" CornerRadius="5">
+                                <interfaz:Button2 x:Name="botonWidgetPrecargaCargarStreaming" Background="{StaticResource ColorPrimario}" RequestedTheme="Light" Padding="15" IsEnabled="False" CornerRadius="5">
                                     <interfaz:Button2.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Uid="WidgetLoadGame" Foreground="{StaticResource ColorFuente}"/>
+                                            <TextBlock x:Uid="WidgetLoadStreaming" Foreground="{StaticResource ColorFuente}"/>
                                         </StackPanel>
                                     </interfaz:Button2.Content>
                                 </interfaz:Button2>
 
-                                <TextBlock x:Name="tbWidgetCargarJuegoMensaje" Foreground="{StaticResource ColorFuente}" Margin="0,30,0,0" Visibility="Collapsed"/>
+                                <TextBlock x:Name="tbWidgetCargarStreamingMensaje" Foreground="{StaticResource ColorFuente}" Margin="0,30,0,0" Visibility="Collapsed"/>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>

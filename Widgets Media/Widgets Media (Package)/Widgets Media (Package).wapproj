@@ -75,6 +75,7 @@
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Media" Version="7.1.2" />
     <PackageReference Include="FontAwesome6.Fonts.WinUI" Version="2.5.1" />
+    <PackageReference Include="Google.Apis.CustomSearchAPI.v1" Version="1.60.0.2455" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.230118.102">
       <IncludeAssets>build</IncludeAssets>
     </PackageReference>

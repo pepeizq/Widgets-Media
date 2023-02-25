@@ -51,7 +51,7 @@ namespace Interfaz
                 }
             }
 
-            return enTrial;
+            return false;
         }
 
         public static async void BotonAbrirCompra(object sender, RoutedEventArgs e)

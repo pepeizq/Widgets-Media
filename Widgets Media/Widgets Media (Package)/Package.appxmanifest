@@ -45,25 +45,25 @@
 		<Extensions>
 			<com:Extension Category="windows.comServer">
 				<com:ComServer>
-					<com:ExeServer Executable="Widgets Media\Widgets Media.exe" Arguments="-RegisterProcessAsComServer" DisplayName="WidgetStreaming">
-						<com:Class Id="B346D60C-42FC-4D9F-AB57-DC263E64F243" DisplayName="WidgetStreaming" />
+					<com:ExeServer Executable="Widgets Media\Widgets Media.exe" Arguments="-RegisterProcessAsComServer" DisplayName="WidgetsStreaming">
+						<com:Class Id="B346D60C-42FC-4D9F-AB57-DC263E64F244" DisplayName="WidgetsStreaming" />
 					</com:ExeServer>
 				</com:ComServer>
 			</com:Extension>
 			<uap3:Extension Category="windows.appExtension">
-				<uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="pepeizq&apos;s Widgets for Streaming" Id="WidgetsStreaming" PublicFolder="Public">
+				<uap3:AppExtension Name="com.microsoft.windows.widgets" DisplayName="pepeizq&apos;s Widgets for Streaming" Id="WidgetsMedia" PublicFolder="Public">
 					<uap3:Properties>
 						<WidgetProvider>
 							<ProviderIcons>
 								<Icon Path="Images\Logos\Square44x44Logo.scale-100.png" />
 							</ProviderIcons>
 							<Activation>
-								<CreateInstance ClassId="B346D60C-42FC-4D9F-AB57-DC263E64F243" />
+								<CreateInstance ClassId="B346D60C-42FC-4D9F-AB57-DC263E64F244" />
 							</Activation>
 							<Definitions>
 								<Definition Id="Media"
 									DisplayName="pepeizq&apos;s Widgets for Streaming"
-									Description="Widget Streaming Description">
+									Description="Widgets Streaming Description">
 									<Capabilities>
 										<Capability>
 											<Size Name="small" />

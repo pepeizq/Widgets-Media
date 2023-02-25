@@ -18,8 +18,7 @@ internal class WidgetMedia : WidgetBase
             string plantilla = Ficheros.LeerFicheroFueraAplicacion(ApplicationData.Current.LocalFolder.Path + "/Plantillas/Media" + ID + ".json");
             Media json = JsonSerializer.Deserialize<Media>(plantilla);
 
-            if (json.enlace.Contains("steam://rungameid/") == true || json.enlace.Contains("uplay://launch/") == true || 
-                json.enlace.Contains("amazon-games://play/") == true || json.enlace.Contains("com.epicgames.launcher://apps/") == true)
+            if (json.enlace.Contains("spotify:") == true)
             {
                 await Launcher.LaunchUriAsync(new Uri(json.enlace));
             }

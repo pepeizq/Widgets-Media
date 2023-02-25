@@ -21,6 +21,9 @@ namespace Widgets_Media
             Interfaz.Menu.Cargar();
             Trial.Cargar();
             Plataformas.Spotify.Cargar();
+
+         
+            //Plataformas.Google.Buscar();
             WidgetPrecarga.Cargar();
             Opciones.CargarDatos();
 
@@ -82,8 +85,8 @@ namespace Widgets_Media
             ObjetosVentana.imagenWidgetPrecargaElegida = imagenWidgetPrecargaElegida;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionHorizontal = cbWidgetPrecargaImagenOrientacionHorizontal;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical = cbWidgetPrecargaImagenOrientacionVertical;
-            ObjetosVentana.botonWidgetPrecargaCargarJuego = botonWidgetPrecargaCargarJuego;
-            ObjetosVentana.tbWidgetCargarJuegoMensaje = tbWidgetCargarJuegoMensaje;
+            ObjetosVentana.botonWidgetPrecargaCargarStreaming = botonWidgetPrecargaCargarStreaming;
+            ObjetosVentana.tbWidgetCargarStreamingMensaje = tbWidgetCargarStreamingMensaje;
 
             //-------------------------------------------------------------------
 
@@ -148,8 +151,8 @@ namespace Widgets_Media
             public static ImageEx imagenWidgetPrecargaElegida { get; set; }
             public static ComboBox cbWidgetPrecargaImagenOrientacionHorizontal { get; set; }
             public static ComboBox cbWidgetPrecargaImagenOrientacionVertical { get; set; }
-            public static Button botonWidgetPrecargaCargarJuego { get; set; }
-            public static TextBlock tbWidgetCargarJuegoMensaje { get; set; }
+            public static Button botonWidgetPrecargaCargarStreaming { get; set; }
+            public static TextBlock tbWidgetCargarStreamingMensaje { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -163,8 +166,9 @@ namespace Widgets_Media
         {
             ResourceLoader recursos = new ResourceLoader();
 
-            Pestañas.CreadorItems("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyMedia"));
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_cualquierstreaming.png", recursos.GetString("AnyMedia"));
             Pestañas.CreadorItems("/Assets/Plataformas/logo_spotify.png", "Spotify");
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_netflix.png", "Netflix");
 
             //----------------------------------------------------------
 
@@ -173,10 +177,10 @@ namespace Widgets_Media
             botonSpotify.Click += AbrirSpotifyClick;
             ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemSpotify);
 
-            GridViewItem itemCualquierJuego = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierjuego.png", recursos.GetString("AnyMedia"), true);
-            Button2 botonCualquierJuego = itemCualquierJuego.Content as Button2;
-            botonCualquierJuego.Click += AbrirCualquierJuegoClick;
-            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemCualquierJuego);
+            GridViewItem itemCualquierStreaming = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierstreaming.png", recursos.GetString("AnyMedia"), true);
+            Button2 botonCualquierStreaming = itemCualquierStreaming.Content as Button2;
+            botonCualquierStreaming.Click += AbrirCualquierStreamingClick;
+            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemCualquierStreaming);
         }
 
         private void nvPrincipal_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -220,7 +224,7 @@ namespace Widgets_Media
                                 BarraTitulo.CambiarTitulo(null);
                                 ScrollViewers.EnseñarSubir(svSpotifyResultados);
                             }
-                            else if (tb.Text == recursos.GetString("AnyGame"))
+                            else if (tb.Text == recursos.GetString("AnyMedia"))
                             {
                                 Pestañas.Visibilidad(gridWidgetPrecarga, true, null, false);
                                 BarraTitulo.CambiarTitulo(null);
@@ -240,7 +244,7 @@ namespace Widgets_Media
             ScrollViewers.EnseñarSubir(svSpotifyResultados);       
         }
 
-        private void AbrirCualquierJuegoClick(object sender, RoutedEventArgs e)
+        private void AbrirCualquierStreamingClick(object sender, RoutedEventArgs e)
         {
             Pestañas.Visibilidad(gridWidgetPrecarga, true, null, false);
             BarraTitulo.CambiarTitulo(null);

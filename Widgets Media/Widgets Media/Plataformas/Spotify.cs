@@ -211,6 +211,22 @@ namespace Plataformas
                             ObjetosVentana.gvSpotifyResultados.Items.Add(GenerarItem(plist.Images[0].Url, plist.Name, plist));
                         }
                     }
+                    else if (ObjetosVentana.cbSpotifyTipoBuscar.SelectedIndex == 2)
+                    {
+                        SearchRequest busqueda = new SearchRequest(SearchRequest.Types.Artist, ObjetosVentana.tbSpotifyBuscar.Text.Trim())
+                        {
+                            Limit = 50
+                        };
+
+                        SearchResponse resultados = await cliente.Search.Item(busqueda);
+
+                        ObjetosVentana.gvSpotifyResultados.Items.Clear();
+
+                        foreach (FullArtist pista in resultados.Artists.Items)
+                        {
+                            ObjetosVentana.gvSpotifyResultados.Items.Add(GenerarItem(pista.Images[0].Url, pista.Name, pista));
+                        }
+                    }
                 }
 
                 ActivarDesactivar(true);
@@ -283,6 +299,15 @@ namespace Plataformas
                         plist.Uri, string.Empty,
                         plist.Images[0].Url,
                         plist.Images[1].Url);
+            }
+            else if (boton.Tag.GetType() == typeof(FullArtist))
+            {
+                FullArtist artista = boton.Tag as FullArtist;
+
+                WidgetPrecarga.PrecargarMedia(artista.Name,
+                        artista.Uri, string.Empty,
+                        artista.Images[0].Url,
+                        artista.Images[1].Url);
             }
         }
 
