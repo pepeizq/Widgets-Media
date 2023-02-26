@@ -20,10 +20,10 @@ namespace Widgets_Media
             ScrollViewers.Cargar();
             Interfaz.Menu.Cargar();
             Trial.Cargar();
+
+            Plataformas.Netflix.Cargar();
             Plataformas.Spotify.Cargar();
 
-         
-            //Plataformas.Google.Buscar();
             WidgetPrecarga.Cargar();
             Opciones.CargarDatos();
 
@@ -44,6 +44,7 @@ namespace Widgets_Media
             //-------------------------------------------------------------------
 
             ObjetosVentana.gridPresentacion = gridPresentacion;
+            ObjetosVentana.gridNetflix = gridNetflix;
             ObjetosVentana.gridSpotify = gridSpotify;
             ObjetosVentana.gridWidgetPrecarga = gridWidgetPrecarga;
             ObjetosVentana.gridOpciones = gridOpciones;
@@ -54,6 +55,14 @@ namespace Widgets_Media
             ObjetosVentana.gvPresentacionPlataformas = gvPresentacionPlataformas;
             ObjetosVentana.spPresentacionTrial = spPresentacionTrial;
             ObjetosVentana.botonPresentacionTrialComprar = botonPresentacionTrialComprar;
+
+            //-------------------------------------------------------------------
+
+            ObjetosVentana.botonNetflixBuscar = botonNetflixBuscar;
+            ObjetosVentana.tbNetflixBuscar = tbNetflixBuscar;
+            ObjetosVentana.svNetflixResultados = svNetflixResultados;
+            ObjetosVentana.prNetflixResultados = prNetflixResultados;
+            ObjetosVentana.gvNetflixResultados = gvNetflixResultados;
 
             //-------------------------------------------------------------------
 
@@ -110,6 +119,7 @@ namespace Widgets_Media
             //-------------------------------------------------------------------
 
             public static Grid gridPresentacion { get; set; }
+            public static Grid gridNetflix { get; set; }
             public static Grid gridSpotify { get; set; }
             public static Grid gridWidgetPrecarga { get; set; }
             public static Grid gridOpciones { get; set; }
@@ -120,6 +130,14 @@ namespace Widgets_Media
             public static AdaptiveGridView gvPresentacionPlataformas { get; set; }
             public static StackPanel spPresentacionTrial { get; set; }
             public static Button botonPresentacionTrialComprar { get; set; }
+
+            //-------------------------------------------------------------------
+
+            public static Button botonNetflixBuscar { get; set; }
+            public static TextBox tbNetflixBuscar { get; set; }
+            public static ScrollViewer svNetflixResultados { get; set; }
+            public static ProgressRing prNetflixResultados { get; set; }
+            public static AdaptiveGridView gvNetflixResultados { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -172,6 +190,11 @@ namespace Widgets_Media
 
             //----------------------------------------------------------
 
+            GridViewItem itemNetflix = Presentacion.CreadorBotones("/Assets/Plataformas/logo_netflix_completo.png", "Netflix", false);
+            Button2 botonNetflix = itemNetflix.Content as Button2;
+            botonNetflix.Click += AbrirNetflixClick;
+            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemNetflix);
+
             GridViewItem itemSpotify = Presentacion.CreadorBotones("/Assets/Plataformas/logo_spotify_completo.png", "Spotify", false);
             Button2 botonSpotify = itemSpotify.Content as Button2;
             botonSpotify.Click += AbrirSpotifyClick;
@@ -218,7 +241,13 @@ namespace Widgets_Media
                         {
                             TextBlock tb = sp.Children[1] as TextBlock;
 
-                            if (tb.Text == "Spotify")
+                            if (tb.Text == "Netflix")
+                            {
+                                Pestañas.Visibilidad(gridNetflix, true, sp, true);
+                                BarraTitulo.CambiarTitulo(null);
+                                ScrollViewers.EnseñarSubir(svNetflixResultados);
+                            }
+                            else if (tb.Text == "Spotify")
                             {
                                 Pestañas.Visibilidad(gridSpotify, true, sp, true);
                                 BarraTitulo.CambiarTitulo(null);
@@ -236,9 +265,17 @@ namespace Widgets_Media
             }
         }
 
-        private void AbrirSpotifyClick(object sender, RoutedEventArgs e)
+        private void AbrirNetflixClick(object sender, RoutedEventArgs e)
         {
             StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[1];
+            Pestañas.Visibilidad(gridNetflix, true, sp, true);
+            BarraTitulo.CambiarTitulo(null);
+            ScrollViewers.EnseñarSubir(svNetflixResultados);
+        }
+
+        private void AbrirSpotifyClick(object sender, RoutedEventArgs e)
+        {
+            StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[2];
             Pestañas.Visibilidad(gridSpotify, true, sp, true);
             BarraTitulo.CambiarTitulo(null);
             ScrollViewers.EnseñarSubir(svSpotifyResultados);       

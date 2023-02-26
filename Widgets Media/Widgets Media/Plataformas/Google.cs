@@ -9,16 +9,15 @@ namespace Plataformas
     {
         //https://programmablesearchengine.google.com/controlpanel/all
 
-        public static void Buscar()
+        public static List<string> Buscar(string cosaBuscar)
         {
             string apiClave = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
             string motorBusquedaID = "e6760ff33b21c479a";
-            string query = "witcher";
 
             CustomSearchAPIService servicio = new CustomSearchAPIService(new BaseClientService.Initializer { ApiKey = apiClave });
             CseResource.ListRequest peticion = servicio.Cse.List();
             peticion.Cx = motorBusquedaID;
-            peticion.Q = query;
+            peticion.Q = cosaBuscar;
 
             List<string> enlacesResultados = new List<string>();
 
@@ -40,7 +39,7 @@ namespace Plataformas
                 i += 1;
             }
 
-            //Notificaciones.Toast(resultados[0].HtmlTitle);
+            return enlacesResultados;
         }
     }
 }

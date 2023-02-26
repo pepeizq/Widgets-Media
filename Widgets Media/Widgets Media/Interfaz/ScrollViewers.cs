@@ -15,6 +15,7 @@ namespace Interfaz
             ObjetosVentana.nvItemSubirArriba.PointerExited += Animaciones.SaleRatonNvItem2;
 
             ObjetosVentana.svPresentacion.ViewChanging += svScroll;
+            ObjetosVentana.svNetflixResultados.ViewChanging += svScroll;
             ObjetosVentana.svSpotifyResultados.ViewChanging += svScroll;
             ObjetosVentana.svWidgetPrecarga.ViewChanging += svScroll;
             ObjetosVentana.svOpciones.ViewChanging += svScroll;
@@ -42,7 +43,11 @@ namespace Interfaz
             Grid grid = nvItem.Content as Grid;
             grid.Background = new SolidColorBrush(Colors.Transparent);
 
-            if (ObjetosVentana.gridSpotify.Visibility == Visibility.Visible)
+            if (ObjetosVentana.gridNetflix.Visibility == Visibility.Visible)
+            {
+                ObjetosVentana.svNetflixResultados.ChangeView(null, 0, null);
+            }
+            else if (ObjetosVentana.gridSpotify.Visibility == Visibility.Visible)
             {
                 ObjetosVentana.svSpotifyResultados.ChangeView(null, 0, null);
             }

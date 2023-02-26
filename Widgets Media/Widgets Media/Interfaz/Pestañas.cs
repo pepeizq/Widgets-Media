@@ -60,6 +60,7 @@ namespace Interfaz
 
             ObjetosVentana.nvPrincipal.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridPresentacion.Visibility = Visibility.Collapsed;
+            ObjetosVentana.gridNetflix.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridSpotify.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridWidgetPrecarga.Visibility = Visibility.Collapsed;
             ObjetosVentana.gridOpciones.Visibility = Visibility.Collapsed;
