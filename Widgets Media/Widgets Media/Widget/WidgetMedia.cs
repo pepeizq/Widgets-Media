@@ -17,29 +17,7 @@ internal class WidgetMedia : WidgetBase
         {
             string plantilla = Ficheros.LeerFicheroFueraAplicacion(ApplicationData.Current.LocalFolder.Path + "/Plantillas/Media" + ID + ".json");
             Media json = JsonSerializer.Deserialize<Media>(plantilla);
-
-            if (json.enlace.Contains("spotify:") == true)
-            {
-                await Launcher.LaunchUriAsync(new Uri(json.enlace));
-            }
-            else
-            {
-                string ejecutable = json.enlace.Trim();
-                string argumentos = json.argumentos.Trim();
-               
-                Process proceso = new Process();
-                proceso.StartInfo.FileName = ejecutable;
-                
-                if (argumentos.Length > 0)
-                {
-                    proceso.StartInfo.Arguments = argumentos;
-                    proceso.StartInfo.RedirectStandardInput = true;
-                    proceso.StartInfo.UseShellExecute = false;
-                    proceso.StartInfo.CreateNoWindow = true;
-                }
-                
-                proceso.Start();
-            }           
+            await Launcher.LaunchUriAsync(new Uri(json.enlace));
         }
     }
 

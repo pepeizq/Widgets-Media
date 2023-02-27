@@ -63,6 +63,7 @@ namespace Widgets_Media
             ObjetosVentana.svNetflixResultados = svNetflixResultados;
             ObjetosVentana.prNetflixResultados = prNetflixResultados;
             ObjetosVentana.gvNetflixResultados = gvNetflixResultados;
+            ObjetosVentana.cbOpcionesNetflixModo = cbOpcionesNetflixModo;
 
             //-------------------------------------------------------------------
 
@@ -75,6 +76,7 @@ namespace Widgets_Media
             ObjetosVentana.gvSpotifyResultados = gvSpotifyResultados;
             ObjetosVentana.gridSpotifyMensajeOpciones = gridSpotifyMensajeOpciones;
             ObjetosVentana.botonSpotifyIrOpciones = botonSpotifyIrOpciones;
+            ObjetosVentana.cbOpcionesSpotifyModo = cbOpcionesSpotifyModo;
             ObjetosVentana.botonOpcionesSpotifyAbrirAyuda = botonOpcionesSpotifyAbrirAyuda;
             ObjetosVentana.tbOpcionesSpotifyClienteID = tbOpcionesSpotifyClienteID;
             ObjetosVentana.tbOpcionesSpotifyClienteSecreto = tbOpcionesSpotifyClienteSecreto;
@@ -138,6 +140,7 @@ namespace Widgets_Media
             public static ScrollViewer svNetflixResultados { get; set; }
             public static ProgressRing prNetflixResultados { get; set; }
             public static AdaptiveGridView gvNetflixResultados { get; set; }
+            public static ComboBox cbOpcionesNetflixModo { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -150,6 +153,7 @@ namespace Widgets_Media
             public static AdaptiveGridView gvSpotifyResultados { get; set; }
             public static Grid gridSpotifyMensajeOpciones { get; set; }
             public static Button botonSpotifyIrOpciones { get; set; }
+            public static ComboBox cbOpcionesSpotifyModo { get; set; }
             public static Button botonOpcionesSpotifyAbrirAyuda { get; set; }
             public static TextBox tbOpcionesSpotifyClienteID { get; set; }
             public static TextBox tbOpcionesSpotifyClienteSecreto { get; set; }

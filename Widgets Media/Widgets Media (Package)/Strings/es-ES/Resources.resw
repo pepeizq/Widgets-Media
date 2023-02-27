@@ -207,6 +207,15 @@
   <data name="OptionsLanguageInfo.Text" xml:space="preserve">
     <value>Selecciona el idioma de la aplicación, es necesario un reinicio en la aplicación para efectuar el cambio.</value>
   </data>
+  <data name="OptionsLaunch.Text" xml:space="preserve">
+    <value>¿Como deseas ejecutar el widget de esta plataforma de streaming?</value>
+  </data>
+  <data name="OptionsLaunchApp.Text" xml:space="preserve">
+    <value>Aplicación</value>
+  </data>
+  <data name="OptionsLaunchWebBrower.Text" xml:space="preserve">
+    <value>Navegador Web</value>
+  </data>
   <data name="PresentationMessage.Text" xml:space="preserve">
     <value>Selecciona el streaming que quieres añadir como widget:</value>
   </data>

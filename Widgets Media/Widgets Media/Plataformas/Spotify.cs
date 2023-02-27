@@ -26,11 +26,24 @@ namespace Plataformas
             ObjetosVentana.botonSpotifyBuscar.PointerEntered += Animaciones.EntraRatonBoton2; 
             ObjetosVentana.botonSpotifyBuscar.PointerExited += Animaciones.SaleRatonBoton2;
 
+            ObjetosVentana.cbOpcionesSpotifyModo.SelectionChanged += CambiarModoEjecucion;
+            ObjetosVentana.cbOpcionesSpotifyModo.PointerEntered += Animaciones.EntraRatonComboCaja2;
+            ObjetosVentana.cbOpcionesSpotifyModo.PointerExited += Animaciones.SaleRatonComboCaja2;
+
+            ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+
+            if (datos.Values["OpcionesSpotifyModo"] == null)
+            {
+                ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = 0;
+            }
+            else
+            {
+                ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = (int)datos.Values["OpcionesSpotifyModo"];
+            }
+
             ObjetosVentana.botonOpcionesSpotifyAbrirAyuda.Click += AbrirAyudaClick;
             ObjetosVentana.botonOpcionesSpotifyAbrirAyuda.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonOpcionesSpotifyAbrirAyuda.PointerExited += Animaciones.SaleRatonBoton2;
-
-            ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
 
             if (datos.Values["OpcionesSpotifyClienteID"] == null)
             {
@@ -59,6 +72,12 @@ namespace Plataformas
             ObjetosVentana.botonSpotifyIrOpciones.PointerExited += Animaciones.SaleRatonBoton2;
 
             ComprobarConexionOpciones();
+        }
+
+        private static void CambiarModoEjecucion(object sender, SelectionChangedEventArgs e)
+        {
+            ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+            datos.Values["OpcionesSpotifyModo"] = ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex;
         }
 
         private static async void AbrirAyudaClick(object sender, RoutedEventArgs e)
@@ -280,14 +299,22 @@ namespace Plataformas
 
         private static void ImagenItemClick(object sender, RoutedEventArgs e)
         {
+            ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
             Button boton = sender as Button;
 
             if (boton.Tag.GetType() == typeof(SimpleAlbum))
             {
                 SimpleAlbum album = boton.Tag as SimpleAlbum;
 
+                string enlace = album.Uri;
+
+                if ((int)datos.Values["OpcionesSpotifyModo"] == 0)
+                {
+                    enlace = enlace.Replace("spotify:album:", "https://open.spotify.com/album/");
+                }
+
                 WidgetPrecarga.PrecargarMedia(album.Name,
-                        album.Uri, string.Empty,
+                        enlace, string.Empty,
                         album.Images[0].Url,
                         album.Images[1].Url);
             }
@@ -295,8 +322,15 @@ namespace Plataformas
             {
                 SimplePlaylist plist = boton.Tag as SimplePlaylist;
 
+                string enlace = plist.Uri;
+
+                if ((int)datos.Values["OpcionesSpotifyModo"] == 0)
+                {
+                    enlace = enlace.Replace("spotify:playlist:", "https://open.spotify.com/playlist/");
+                }
+
                 WidgetPrecarga.PrecargarMedia(plist.Name,
-                        plist.Uri, string.Empty,
+                        enlace, string.Empty,
                         plist.Images[0].Url,
                         plist.Images[1].Url);
             }
@@ -304,8 +338,15 @@ namespace Plataformas
             {
                 FullArtist artista = boton.Tag as FullArtist;
 
+                string enlace = artista.Uri;
+
+                if ((int)datos.Values["OpcionesSpotifyModo"] == 0)
+                {
+                    enlace = enlace.Replace("spotify:artist:", "https://open.spotify.com/artist/");
+                }
+
                 WidgetPrecarga.PrecargarMedia(artista.Name,
-                        artista.Uri, string.Empty,
+                        enlace, string.Empty,
                         artista.Images[0].Url,
                         artista.Images[1].Url);
             }
