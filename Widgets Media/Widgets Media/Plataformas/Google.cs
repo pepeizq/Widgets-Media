@@ -9,10 +9,9 @@ namespace Plataformas
     {
         //https://programmablesearchengine.google.com/controlpanel/all
 
-        public static List<string> Buscar(string cosaBuscar)
+        public static List<string> Buscar(string cosaBuscar, string motorBusquedaID)
         {
             string apiClave = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
-            string motorBusquedaID = "e6760ff33b21c479a";
 
             CustomSearchAPIService servicio = new CustomSearchAPIService(new BaseClientService.Initializer { ApiKey = apiClave });
             CseResource.ListRequest peticion = servicio.Cse.List();

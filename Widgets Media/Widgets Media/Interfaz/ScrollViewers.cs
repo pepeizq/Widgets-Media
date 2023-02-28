@@ -16,6 +16,8 @@ namespace Interfaz
 
             ObjetosVentana.svPresentacion.ViewChanging += svScroll;
             ObjetosVentana.svNetflixResultados.ViewChanging += svScroll;
+            ObjetosVentana.svDisneyPlusResultados.ViewChanging += svScroll;
+            ObjetosVentana.svPrimeVideoResultados.ViewChanging += svScroll;
             ObjetosVentana.svSpotifyResultados.ViewChanging += svScroll;
             ObjetosVentana.svWidgetPrecarga.ViewChanging += svScroll;
             ObjetosVentana.svOpciones.ViewChanging += svScroll;
@@ -46,6 +48,14 @@ namespace Interfaz
             if (ObjetosVentana.gridNetflix.Visibility == Visibility.Visible)
             {
                 ObjetosVentana.svNetflixResultados.ChangeView(null, 0, null);
+            }
+            else if (ObjetosVentana.gridDisneyPlus.Visibility == Visibility.Visible)
+            {
+                ObjetosVentana.svDisneyPlusResultados.ChangeView(null, 0, null);
+            }
+            else if (ObjetosVentana.gridPrimeVideo.Visibility == Visibility.Visible)
+            {
+                ObjetosVentana.svPrimeVideoResultados.ChangeView(null, 0, null);
             }
             else if (ObjetosVentana.gridSpotify.Visibility == Visibility.Visible)
             {

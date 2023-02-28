@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.UI.Xaml;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.Services.Store;
 using Windows.System;
-using System;
-using Microsoft.UI.Xaml;
 using static Widgets_Media.MainWindow;
-using System.Threading.Tasks;
 
 namespace Interfaz
 {
@@ -51,12 +51,12 @@ namespace Interfaz
                 }
             }
 
-            return false;
+            return enTrial;
         }
 
         public static async void BotonAbrirCompra(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://pdp/?ProductId=9N6RH8C536LS"));
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://pdp/?ProductId=9NTHP669WBDD"));
         }
     }
 }

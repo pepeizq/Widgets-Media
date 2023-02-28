@@ -32,7 +32,7 @@ namespace Plataformas
 
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
 
-            if (datos.Values["OpcionesSpotifyModo"] == null)
+            if ((int)datos.Values["OpcionesSpotifyModo"] == -1)
             {
                 ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = 0;
             }
@@ -356,6 +356,7 @@ namespace Plataformas
         {
             ObjetosVentana.cbSpotifyTipoBuscar.IsEnabled = estado;
             ObjetosVentana.botonSpotifyBuscar.IsEnabled = estado;
+            ObjetosVentana.cbOpcionesSpotifyModo.IsEnabled = estado;
             ObjetosVentana.tbSpotifyBuscar.IsEnabled = estado;
             ObjetosVentana.tbOpcionesSpotifyClienteID.IsEnabled = estado;
             ObjetosVentana.tbOpcionesSpotifyClienteSecreto.IsEnabled = estado;

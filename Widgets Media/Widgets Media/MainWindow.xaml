@@ -160,6 +160,72 @@
                     </ScrollViewer>
                 </Grid>
 
+                <Grid x:Name="gridDisneyPlus" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <interfaz:Button2 x:Name="botonDisneyPlusBuscar" Grid.Column="0" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="0,0,20,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <iconos:FontAwesome Icon="Solid_MagnifyingGlass" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
+                                    <TextBlock x:Uid="Search" Foreground="{StaticResource ColorFuente}" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+
+                        <TextBox x:Name="tbDisneyPlusBuscar" Grid.Column="1" RequestedTheme="Dark" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <ScrollViewer x:Name="svDisneyPlusResultados" Grid.Row="1" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical">
+                            <ProgressRing x:Name="prDisneyPlusResultados" IsIndeterminate="True" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Margin="30"/>
+
+                            <controls:AdaptiveGridView x:Name="gvDisneyPlusResultados" DesiredWidth="350" Padding="20" StretchContentForSingleRow="False"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <Grid x:Name="gridPrimeVideo" Visibility="Collapsed">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <interfaz:Button2 x:Name="botonPrimeVideoBuscar" Grid.Column="0" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="0,0,20,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <iconos:FontAwesome Icon="Solid_MagnifyingGlass" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
+                                    <TextBlock x:Uid="Search" Foreground="{StaticResource ColorFuente}" Margin="15,0,0,0" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+
+                        <TextBox x:Name="tbPrimeVideoBuscar" Grid.Column="1" RequestedTheme="Dark" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <ScrollViewer x:Name="svPrimeVideoResultados" Grid.Row="1" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical">
+                            <ProgressRing x:Name="prPrimeVideoResultados" IsIndeterminate="True" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Margin="30"/>
+
+                            <controls:AdaptiveGridView x:Name="gvPrimeVideoResultados" DesiredWidth="350" Padding="20" StretchContentForSingleRow="False"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
                 <Grid x:Name="gridSpotify" Visibility="Collapsed">
                     <Grid x:Name="gridSpotifyBuscador" Visibility="Collapsed">
                         <Grid.RowDefinitions>
@@ -364,6 +430,25 @@
                                     <TextBlock x:Uid="OptionsLaunch" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
 
                                     <interfaz:ComboBox2 x:Name="cbOpcionesNetflixModo" RequestedTheme="Dark" CornerRadius="5">
+                                        <TextBlock x:Uid="OptionsLaunchWebBrower"/>
+                                        <TextBlock x:Uid="OptionsLaunchApp"/>
+                                    </interfaz:ComboBox2>
+                                </StackPanel>
+                            </Expander>
+
+                            <Expander IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" Margin="0,0,0,40">
+                                <Expander.Header>
+                                    <TextBlock Text="Prime Video" Foreground="{StaticResource ColorFuente}" Margin="10,0,0,0"/>
+                                </Expander.Header>
+
+                                <Expander.Background>
+                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                </Expander.Background>
+
+                                <StackPanel Orientation="Vertical" Padding="10">
+                                    <TextBlock x:Uid="OptionsLaunch" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesPrimeVideoModo" RequestedTheme="Dark" CornerRadius="5">
                                         <TextBlock x:Uid="OptionsLaunchWebBrower"/>
                                         <TextBlock x:Uid="OptionsLaunchApp"/>
                                     </interfaz:ComboBox2>

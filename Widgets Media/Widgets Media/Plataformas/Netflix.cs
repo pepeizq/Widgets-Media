@@ -27,8 +27,8 @@ namespace Plataformas
             ObjetosVentana.cbOpcionesNetflixModo.PointerExited += Animaciones.SaleRatonComboCaja2;
 
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
-
-            if (datos.Values["OpcionesNetflixModo"] == null)
+           
+            if ((int)datos.Values["OpcionesNetflixModo"] == -1)
             {
                 ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = 0;
             }
@@ -41,7 +41,7 @@ namespace Plataformas
         private static void CambiarModoEjecucion(object sender, SelectionChangedEventArgs e)
         {
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
-            datos.Values["OpcionesNetflixModo"] = ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex;
+            datos.Values["OpcionesNetflixModo"] = ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex;
         }
 
         private static async void BuscarClick(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace Plataformas
                 ObjetosVentana.gvNetflixResultados.Items.Clear();
 
                 await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim());
+                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), "e6760ff33b21c479a");
 
                 if (resultados.Count > 0)
                 {
@@ -169,6 +169,7 @@ namespace Plataformas
         {
             ObjetosVentana.botonNetflixBuscar.IsEnabled = estado;
             ObjetosVentana.tbNetflixBuscar.IsEnabled = estado;
+            ObjetosVentana.cbOpcionesNetflixModo.IsEnabled = estado;
         }
     }
 

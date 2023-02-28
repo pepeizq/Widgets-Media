@@ -16,7 +16,7 @@
   <Properties>
     <DisplayName>pepeizq&apos;s Widgets for Streaming</DisplayName>
     <PublisherDisplayName>pepeizq</PublisherDisplayName>
-    <Logo>Images\StoreLogo.png</Logo>
+    <Logo>Images\Logos\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -35,11 +35,15 @@
       <uap:VisualElements
         DisplayName="pepeizq&apos;s Widgets for Streaming"
         Description="https://pepeizqapps.com/"
-        BackgroundColor="transparent"
-        Square150x150Logo="Images\Square150x150Logo.png"
-        Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
-        <uap:SplashScreen Image="Images\SplashScreen.png" />
+        BackgroundColor="#083116"
+        Square150x150Logo="Images\Logos\Square150x150Logo.png"
+        Square44x44Logo="Images\Logos\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Logos\Wide310x150Logo.png"  ShortName="Widgets for Streaming" Square71x71Logo="Images\Logos\SmallTile.png" Square310x310Logo="Images\Logos\LargeTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square310x310Logo"/>
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile >
+        <uap:SplashScreen Image="Images\Logos\SplashScreen.png"  BackgroundColor="#083116"/>
       </uap:VisualElements>
 
 		<Extensions>

@@ -3,6 +3,7 @@ using Interfaz;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
+using Plataformas;
 
 namespace Widgets_Media
 {
@@ -21,8 +22,10 @@ namespace Widgets_Media
             Interfaz.Menu.Cargar();
             Trial.Cargar();
 
-            Plataformas.Netflix.Cargar();
-            Plataformas.Spotify.Cargar();
+            Netflix.Cargar();
+            DisneyPlus.Cargar();
+            PrimeVideo.Cargar();
+            Spotify.Cargar();
 
             WidgetPrecarga.Cargar();
             Opciones.CargarDatos();
@@ -45,6 +48,8 @@ namespace Widgets_Media
 
             ObjetosVentana.gridPresentacion = gridPresentacion;
             ObjetosVentana.gridNetflix = gridNetflix;
+            ObjetosVentana.gridDisneyPlus = gridDisneyPlus;
+            ObjetosVentana.gridPrimeVideo = gridPrimeVideo;
             ObjetosVentana.gridSpotify = gridSpotify;
             ObjetosVentana.gridWidgetPrecarga = gridWidgetPrecarga;
             ObjetosVentana.gridOpciones = gridOpciones;
@@ -64,6 +69,23 @@ namespace Widgets_Media
             ObjetosVentana.prNetflixResultados = prNetflixResultados;
             ObjetosVentana.gvNetflixResultados = gvNetflixResultados;
             ObjetosVentana.cbOpcionesNetflixModo = cbOpcionesNetflixModo;
+
+            //-------------------------------------------------------------------
+            
+            ObjetosVentana.botonDisneyPlusBuscar = botonDisneyPlusBuscar;
+            ObjetosVentana.tbDisneyPlusBuscar = tbDisneyPlusBuscar;
+            ObjetosVentana.svDisneyPlusResultados = svDisneyPlusResultados;
+            ObjetosVentana.prDisneyPlusResultados = prDisneyPlusResultados;
+            ObjetosVentana.gvDisneyPlusResultados = gvDisneyPlusResultados;
+
+            //-------------------------------------------------------------------
+
+            ObjetosVentana.botonPrimeVideoBuscar = botonPrimeVideoBuscar;
+            ObjetosVentana.tbPrimeVideoBuscar = tbPrimeVideoBuscar;
+            ObjetosVentana.svPrimeVideoResultados = svPrimeVideoResultados;
+            ObjetosVentana.prPrimeVideoResultados = prPrimeVideoResultados;
+            ObjetosVentana.gvPrimeVideoResultados = gvPrimeVideoResultados;
+            ObjetosVentana.cbOpcionesPrimeVideoModo = cbOpcionesPrimeVideoModo;
 
             //-------------------------------------------------------------------
 
@@ -122,6 +144,8 @@ namespace Widgets_Media
 
             public static Grid gridPresentacion { get; set; }
             public static Grid gridNetflix { get; set; }
+            public static Grid gridDisneyPlus { get; set; }
+            public static Grid gridPrimeVideo { get; set; }
             public static Grid gridSpotify { get; set; }
             public static Grid gridWidgetPrecarga { get; set; }
             public static Grid gridOpciones { get; set; }
@@ -141,6 +165,22 @@ namespace Widgets_Media
             public static ProgressRing prNetflixResultados { get; set; }
             public static AdaptiveGridView gvNetflixResultados { get; set; }
             public static ComboBox cbOpcionesNetflixModo { get; set; }
+
+            //-------------------------------------------------------------------
+            public static Button botonDisneyPlusBuscar { get; set; }
+            public static TextBox tbDisneyPlusBuscar { get; set; }
+            public static ScrollViewer svDisneyPlusResultados { get; set; }
+            public static ProgressRing prDisneyPlusResultados { get; set; }
+            public static AdaptiveGridView gvDisneyPlusResultados { get; set; }
+
+            //-------------------------------------------------------------------
+
+            public static Button botonPrimeVideoBuscar { get; set; }
+            public static TextBox tbPrimeVideoBuscar { get; set; }
+            public static ScrollViewer svPrimeVideoResultados { get; set; }
+            public static ProgressRing prPrimeVideoResultados { get; set; }
+            public static AdaptiveGridView gvPrimeVideoResultados { get; set; }
+            public static ComboBox cbOpcionesPrimeVideoModo { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -190,21 +230,33 @@ namespace Widgets_Media
 
             Pestañas.CreadorItems("/Assets/Plataformas/logo_cualquierstreaming.png", recursos.GetString("AnyMedia"));
             Pestañas.CreadorItems("/Assets/Plataformas/logo_spotify.png", "Spotify");
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_primevideo.png", "Prime Video");
+            Pestañas.CreadorItems("/Assets/Plataformas/logo_disneyplus.png", "Disney Plus");
             Pestañas.CreadorItems("/Assets/Plataformas/logo_netflix.png", "Netflix");
 
             //----------------------------------------------------------
 
-            GridViewItem itemNetflix = Presentacion.CreadorBotones("/Assets/Plataformas/logo_netflix_completo.png", "Netflix", false);
+            GridViewItem itemNetflix = Presentacion.CreadorBotones("/Assets/Plataformas/logo_netflix_completo.png", "Netflix", false, 25);
             Button2 botonNetflix = itemNetflix.Content as Button2;
             botonNetflix.Click += AbrirNetflixClick;
             ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemNetflix);
 
-            GridViewItem itemSpotify = Presentacion.CreadorBotones("/Assets/Plataformas/logo_spotify_completo.png", "Spotify", false);
+            GridViewItem itemDisneyPlus = Presentacion.CreadorBotones("/Assets/Plataformas/logo_disneyplus.png", "Disney Plus", false, 10);
+            Button2 botonDisneyPlus = itemDisneyPlus.Content as Button2;
+            botonDisneyPlus.Click += AbrirDisneyPlusClick;
+            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemDisneyPlus);
+
+            GridViewItem itemPrimeVideo = Presentacion.CreadorBotones("/Assets/Plataformas/logo_primevideo_completo.png", "Prime Video", false, 20);
+            Button2 botonPrimeVideo = itemPrimeVideo.Content as Button2;
+            botonPrimeVideo.Click += AbrirPrimeVideoClick;
+            ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemPrimeVideo);
+
+            GridViewItem itemSpotify = Presentacion.CreadorBotones("/Assets/Plataformas/logo_spotify_completo.png", "Spotify", false, 20);
             Button2 botonSpotify = itemSpotify.Content as Button2;
             botonSpotify.Click += AbrirSpotifyClick;
             ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemSpotify);
 
-            GridViewItem itemCualquierStreaming = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierstreaming.png", recursos.GetString("AnyMedia"), true);
+            GridViewItem itemCualquierStreaming = Presentacion.CreadorBotones("/Assets/Plataformas/logo_cualquierstreaming.png", recursos.GetString("AnyMedia"), true, 20);
             Button2 botonCualquierStreaming = itemCualquierStreaming.Content as Button2;
             botonCualquierStreaming.Click += AbrirCualquierStreamingClick;
             ObjetosVentana.gvPresentacionPlataformas.Items.Add(itemCualquierStreaming);
@@ -251,6 +303,18 @@ namespace Widgets_Media
                                 BarraTitulo.CambiarTitulo(null);
                                 ScrollViewers.EnseñarSubir(svNetflixResultados);
                             }
+                            else if (tb.Text == "Disney Plus")
+                            {
+                                Pestañas.Visibilidad(gridDisneyPlus, true, sp, true);
+                                BarraTitulo.CambiarTitulo(null);
+                                ScrollViewers.EnseñarSubir(svDisneyPlusResultados);
+                            }
+                            else if (tb.Text == "Prime Video")
+                            {
+                                Pestañas.Visibilidad(gridPrimeVideo, true, sp, true);
+                                BarraTitulo.CambiarTitulo(null);
+                                ScrollViewers.EnseñarSubir(svPrimeVideoResultados);
+                            }
                             else if (tb.Text == "Spotify")
                             {
                                 Pestañas.Visibilidad(gridSpotify, true, sp, true);
@@ -277,9 +341,25 @@ namespace Widgets_Media
             ScrollViewers.EnseñarSubir(svNetflixResultados);
         }
 
-        private void AbrirSpotifyClick(object sender, RoutedEventArgs e)
+        private void AbrirDisneyPlusClick(object sender, RoutedEventArgs e)
         {
             StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[2];
+            Pestañas.Visibilidad(gridDisneyPlus, true, sp, true);
+            BarraTitulo.CambiarTitulo(null);
+            ScrollViewers.EnseñarSubir(svDisneyPlusResultados);
+        }
+
+        private void AbrirPrimeVideoClick(object sender, RoutedEventArgs e)
+        {
+            StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[3];
+            Pestañas.Visibilidad(gridPrimeVideo, true, sp, true);
+            BarraTitulo.CambiarTitulo(null);
+            ScrollViewers.EnseñarSubir(svPrimeVideoResultados);
+        }
+
+        private void AbrirSpotifyClick(object sender, RoutedEventArgs e)
+        {
+            StackPanel sp = (StackPanel)ObjetosVentana.nvPrincipal.MenuItems[4];
             Pestañas.Visibilidad(gridSpotify, true, sp, true);
             BarraTitulo.CambiarTitulo(null);
             ScrollViewers.EnseñarSubir(svSpotifyResultados);       
