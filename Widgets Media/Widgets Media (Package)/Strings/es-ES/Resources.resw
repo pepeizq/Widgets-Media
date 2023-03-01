@@ -180,6 +180,9 @@
   <data name="Options" xml:space="preserve">
     <value>Opciones</value>
   </data>
+  <data name="Options2.Text" xml:space="preserve">
+    <value>Opciones</value>
+  </data>
   <data name="OptionsApp.Text" xml:space="preserve">
     <value>Aplicación</value>
   </data>

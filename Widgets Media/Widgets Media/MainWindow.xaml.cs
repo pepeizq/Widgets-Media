@@ -123,6 +123,19 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
+            ObjetosVentana.botonOpcionesMoverNetflix = botonOpcionesMoverNetflix;
+            ObjetosVentana.botonOpcionesMoverPrimeVideo = botonOpcionesMoverPrimeVideo;
+            ObjetosVentana.botonOpcionesMoverSpotify = botonOpcionesMoverSpotify;
+            ObjetosVentana.botonOpcionesMoverIdioma = botonOpcionesMoverIdioma;
+            ObjetosVentana.botonOpcionesMoverAplicacion = botonOpcionesMoverAplicacion;
+            ObjetosVentana.expanderOpcionesNetflix = expanderOpcionesNetflix;
+            ObjetosVentana.expanderOpcionesPrimeVideo = expanderOpcionesPrimeVideo;
+            ObjetosVentana.expanderOpcionesSpotify = expanderOpcionesSpotify;
+            ObjetosVentana.expanderOpcionesIdioma = expanderOpcionesIdioma;
+            ObjetosVentana.expanderOpcionesAplicacion = expanderOpcionesAplicacion;
+
+            //-------------------------------------------------------------------
+
             ObjetosVentana.svOpciones = svOpciones;
             ObjetosVentana.cbOpcionesIdioma = cbOpcionesIdioma;
             ObjetosVentana.cbOpcionesPantalla = cbOpcionesPantalla;
@@ -215,6 +228,19 @@ namespace Widgets_Media
             public static ComboBox cbWidgetPrecargaImagenOrientacionVertical { get; set; }
             public static Button botonWidgetPrecargaCargarStreaming { get; set; }
             public static TextBlock tbWidgetCargarStreamingMensaje { get; set; }
+
+            //-------------------------------------------------------------------
+
+            public static Button botonOpcionesMoverNetflix { get; set; }
+            public static Button botonOpcionesMoverPrimeVideo { get; set; }
+            public static Button botonOpcionesMoverSpotify { get; set; }
+            public static Button botonOpcionesMoverIdioma { get; set; }
+            public static Button botonOpcionesMoverAplicacion { get; set; }
+            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesNetflix { get; set; }
+            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesPrimeVideo { get; set; }
+            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesSpotify { get; set; }
+            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesIdioma { get; set; }
+            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesAplicacion { get; set; }
 
             //-------------------------------------------------------------------
 
