@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Plataformas;
+using Expander = Microsoft.UI.Xaml.Controls.Expander;
 
 namespace Widgets_Media
 {
@@ -215,12 +216,12 @@ namespace Widgets_Media
 
             public static ScrollViewer svWidgetPrecarga { get; set; }
             public static TextBlock tbWidgetPrecargaTitulo { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderWidgetPrecargaDatos { get; set; }
+            public static Expander expanderWidgetPrecargaDatos { get; set; }
             public static TextBox tbWidgetPrecargaEjecutable { get; set; }
             public static TextBox tbWidgetPrecargaArgumentos { get; set; }
             public static TextBox tbWidgetPrecargaImagenPequeña { get; set; }
             public static TextBox tbWidgetPrecargaImagenGrande { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderWidgetPrecargaPersonalizacion { get; set; }
+            public static Expander expanderWidgetPrecargaPersonalizacion { get; set; }
             public static ComboBox cbWidgetPrecargaImagen { get; set; }
             public static TextBlock tbWidgetPrecargaMensajeImagen { get; set; }
             public static ImageEx imagenWidgetPrecargaElegida { get; set; }
@@ -236,11 +237,11 @@ namespace Widgets_Media
             public static Button botonOpcionesMoverSpotify { get; set; }
             public static Button botonOpcionesMoverIdioma { get; set; }
             public static Button botonOpcionesMoverAplicacion { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesNetflix { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesPrimeVideo { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesSpotify { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesIdioma { get; set; }
-            public static Microsoft.UI.Xaml.Controls.Expander expanderOpcionesAplicacion { get; set; }
+            public static Expander expanderOpcionesNetflix { get; set; }
+            public static Expander expanderOpcionesPrimeVideo { get; set; }
+            public static Expander expanderOpcionesSpotify { get; set; }
+            public static Expander expanderOpcionesIdioma { get; set; }
+            public static Expander expanderOpcionesAplicacion { get; set; }
 
             //-------------------------------------------------------------------
 

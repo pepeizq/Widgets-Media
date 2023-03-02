@@ -14,13 +14,13 @@ namespace Interfaz
             ObjetosVentana.nvItemSubirArriba.PointerEntered += Animaciones.EntraRatonNvItem2;
             ObjetosVentana.nvItemSubirArriba.PointerExited += Animaciones.SaleRatonNvItem2;
 
-            ObjetosVentana.svPresentacion.ViewChanging += svScroll;
-            ObjetosVentana.svNetflixResultados.ViewChanging += svScroll;
-            ObjetosVentana.svDisneyPlusResultados.ViewChanging += svScroll;
-            ObjetosVentana.svPrimeVideoResultados.ViewChanging += svScroll;
-            ObjetosVentana.svSpotifyResultados.ViewChanging += svScroll;
-            ObjetosVentana.svWidgetPrecarga.ViewChanging += svScroll;
-            ObjetosVentana.svOpciones.ViewChanging += svScroll;
+            ObjetosVentana.svPresentacion.ViewChanging += MoverScroll;
+            ObjetosVentana.svNetflixResultados.ViewChanging += MoverScroll;
+            ObjetosVentana.svDisneyPlusResultados.ViewChanging += MoverScroll;
+            ObjetosVentana.svPrimeVideoResultados.ViewChanging += MoverScroll;
+            ObjetosVentana.svSpotifyResultados.ViewChanging += MoverScroll;
+            ObjetosVentana.svWidgetPrecarga.ViewChanging += MoverScroll;
+            ObjetosVentana.svOpciones.ViewChanging += MoverScroll;
 
             ObjetosVentana.botonOpcionesMoverNetflix.Click += MoverNetflix;
             ObjetosVentana.botonOpcionesMoverNetflix.PointerEntered += Animaciones.EntraRatonBoton2;
@@ -39,7 +39,7 @@ namespace Interfaz
             ObjetosVentana.botonOpcionesMoverAplicacion.PointerExited += Animaciones.SaleRatonBoton2;
         }
 
-        private static void svScroll(object sender, ScrollViewerViewChangingEventArgs args)
+        private static void MoverScroll(object sender, ScrollViewerViewChangingEventArgs args)
         {
             ScrollViewer sv = sender as ScrollViewer;
 
