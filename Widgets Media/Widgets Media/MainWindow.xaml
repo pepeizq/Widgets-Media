@@ -156,6 +156,8 @@
                             <ProgressRing x:Name="prNetflixResultados" IsIndeterminate="True" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Margin="30"/>
 
                             <controls:AdaptiveGridView x:Name="gvNetflixResultados" DesiredWidth="250" Padding="20" StretchContentForSingleRow="False"/>
+
+                            <TeachingTip x:Name="ttNetflixErrorBuscar" IsOpen="False" RequestedTheme="Dark"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -189,6 +191,8 @@
                             <ProgressRing x:Name="prDisneyPlusResultados" IsIndeterminate="True" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" HorizontalAlignment="Left" Visibility="Collapsed" Margin="30"/>
 
                             <controls:AdaptiveGridView x:Name="gvDisneyPlusResultados" DesiredWidth="350" Padding="20" StretchContentForSingleRow="False"/>
+
+                            <TeachingTip x:Name="ttDisneyErrorBuscar" IsOpen="False" RequestedTheme="Dark"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>
@@ -283,132 +287,168 @@
                 </Grid>
 
                 <Grid x:Name="gridWidgetPrecarga" Visibility="Collapsed">
-                    <ScrollViewer x:Name="svWidgetPrecarga" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <StackPanel Orientation="Vertical" Margin="20">
-                            <TextBlock x:Name="tbWidgetPrecargaTitulo" Foreground="{StaticResource ColorFuente}" Margin="30,0,0,20"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                            <Expander x:Name="expanderWidgetPrecargaDatos" Margin="0,0,0,30" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" IsExpanded="True">
-                                <Expander.Header>
-                                    <TextBlock x:Uid="Data" Foreground="{StaticResource ColorFuente}" Margin="10,0,0,0"/>
-                                </Expander.Header>
+                    <StackPanel x:Name="spWidgetPrecargaBotones" Grid.Column="0" Orientation="Vertical" Padding="40" HorizontalAlignment="Stretch" MinWidth="300">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" CornerRadius="5">
+                            <controls:ImageEx x:Name="imagenWidgetPrecargaElegida" IsCacheEnabled="True" EnableLazyLoading="True" MaxWidth="350" MaxHeight="500" Stretch="Uniform">
+                                <ToolTipService.ToolTip>
+                                    <TextBlock x:Name="tbWidgetPrecargaTitulo" TextWrapping="Wrap"/>
+                                </ToolTipService.ToolTip>
+                            </controls:ImageEx>
+                        </StackPanel>
 
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
-
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="Executable" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,10"/>
-                                    <TextBox x:Name="tbWidgetPrecargaEjecutable" Margin="0,0,0,20" TextWrapping="Wrap"/>
-
-                                    <TextBlock x:Uid="Arguments" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,10" Visibility="Collapsed"/>
-                                    <TextBox x:Name="tbWidgetPrecargaArgumentos" Margin="0,0,0,20" TextWrapping="Wrap" Visibility="Collapsed"/>
-
-                                    <TextBlock x:Uid="ImageSmall" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,10"/>
-                                    <TextBox x:Name="tbWidgetPrecargaPequena" Margin="0,0,0,20" TextWrapping="Wrap"/>
-
-                                    <TextBlock x:Uid="ImageBig" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,10"/>
-                                    <TextBox x:Name="tbWidgetPrecargaGrande" TextWrapping="Wrap"/>
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,20,0,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Uid="Data" Foreground="{StaticResource ColorFuente}"/>
                                 </StackPanel>
-                            </Expander>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,10,0,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Uid="Customization" Foreground="{StaticResource ColorFuente}"/>
+                                </StackPanel>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,10,0,0">
+                            <interfaz:Button2.Content>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Uid="WidgetLoadStreaming" Foreground="{StaticResource ColorFuente}"/>
+                                </StackPanel>
+                            </interfaz:Button2.Content>
+                        </interfaz:Button2>
+                    </StackPanel>
 
-                            <Expander x:Name="expanderWidgetPrecargaPersonalizacion" Margin="0,0,0,30" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" IsExpanded="True">
-                                <Expander.Header>
-                                    <TextBlock x:Uid="Customization" Foreground="{StaticResource ColorFuente}" Margin="10,0,0,0"/>
-                                </Expander.Header>
+                    <ScrollViewer x:Name="svWidgetPrecarga" Grid.Column="1" VerticalScrollBarVisibility="Visible" Padding="0,0,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel x:Name="spWidgetPrecargaPestanas" Orientation="Vertical" Padding="40">
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
 
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
+                                    <TextBlock x:Uid="Executable" Foreground="{StaticResource ColorFuente}"/>
+                                    <TextBlock x:Uid="Executable2" FontSize="13" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,20"/>
 
-                                <Grid Padding="10">
+                                    <TextBox x:Name="tbWidgetPrecargaEjecutable" RequestedTheme="Dark" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
+
+                                    <TextBlock x:Uid="ImageSmall" Foreground="{StaticResource ColorFuente}"/>
+                                    <TextBlock x:Uid="ImageSmall2" FontSize="13" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,20"/>
+
+                                    <TextBox x:Name="tbWidgetPrecargaImagenPequena" RequestedTheme="Dark" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
+
+                                    <TextBlock x:Uid="ImageBig" Foreground="{StaticResource ColorFuente}"/>
+                                    <TextBlock x:Uid="ImageBig2" FontSize="13" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,20"/>
+
+                                    <TextBox x:Name="tbWidgetPrecargaImagenGrande" RequestedTheme="Dark" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <Grid Padding="30" CornerRadius="5">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Top">
-                                        <TextBlock x:Uid="ChooseImage" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,20"/>
-                                        <Grid Margin="0,0,0,50">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                    <TextBlock x:Uid="ChooseImage" Grid.Column="0" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" Margin="0,0,20,0"/>
 
-                                            <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagen" Grid.Column="0" CornerRadius="5" Margin="0,0,20,0">
-                                                <ComboBoxItem>
-                                                    <TextBlock x:Uid="ImageSmall"/>
-                                                </ComboBoxItem>
-                                                <ComboBoxItem>
-                                                    <TextBlock x:Uid="ImageBig"/>
-                                                </ComboBoxItem>
-                                            </interfaz:ComboBox2>
-
-                                            <Grid Grid.Column="1">
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                </Grid.ColumnDefinitions>
-
-                                                <iconos:FontAwesome Icon="Solid_CircleInfo" Grid.Column="0" Foreground="{StaticResource ColorFuente}" Margin="0,0,15,0"/>
-                                                <TextBlock x:Name="tbWidgetPrecargaMensajeImagen" Grid.Column="1" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </Grid>
-
-                                        <TextBlock x:Uid="WidgetImageOrientation" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,20"/>
-
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel Orientation="Vertical" Margin="0,0,30,0">
-                                                <TextBlock x:Uid="WidgetImageOrientationHorizontal" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,15"/>
-                                                <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagenOrientacionHorizontal" Margin="0,0,0,20" CornerRadius="5">
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Left"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Center"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Right"/>
-                                                    </ComboBoxItem>
-                                                </interfaz:ComboBox2>
-                                            </StackPanel>
-
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock x:Uid="WidgetImageOrientationVertical" Foreground="{StaticResource ColorFuente}" Margin="0,0,0,15"/>
-                                                <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagenOrientacionVertical" CornerRadius="5">
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Top"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Center"/>
-                                                    </ComboBoxItem>
-                                                    <ComboBoxItem>
-                                                        <TextBlock x:Uid="Bottom"/>
-                                                    </ComboBoxItem>
-                                                </interfaz:ComboBox2>
-                                            </StackPanel>
-                                        </StackPanel>
-                                    </StackPanel>
-
-                                    <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Top">
-                                        <controls:ImageEx x:Name="imagenWidgetPrecargaElegida" IsCacheEnabled="True" EnableLazyLoading="True" MaxWidth="350" Stretch="UniformToFill" VerticalAlignment="Top"/>
-                                    </StackPanel>
+                                    <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagen" Grid.Column="1" CornerRadius="5" RequestedTheme="Dark">
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="ImageSmall"/>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="ImageBig"/>
+                                        </ComboBoxItem>
+                                    </interfaz:ComboBox2>
                                 </Grid>
-                            </Expander>
+                                <Grid Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
 
-                            <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5">
-                                <StackPanel.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </StackPanel.Background>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <interfaz:Button2 x:Name="botonWidgetPrecargaCargarStreaming" Background="{StaticResource ColorPrimario}" RequestedTheme="Light" Padding="15" IsEnabled="False" CornerRadius="5">
-                                    <interfaz:Button2.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock x:Uid="WidgetLoadStreaming" Foreground="{StaticResource ColorFuente}"/>
-                                        </StackPanel>
-                                    </interfaz:Button2.Content>
-                                </interfaz:Button2>
+                                    <TextBlock x:Uid="WidgetImageOrientationHorizontal" Grid.Column="0" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" Margin="0,0,20,0"/>
 
-                                <TextBlock x:Name="tbWidgetCargarStreamingMensaje" Foreground="{StaticResource ColorFuente}" Margin="0,30,0,0" Visibility="Collapsed"/>
+                                    <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagenOrientacionHorizontal" Grid.Column="1" CornerRadius="5" RequestedTheme="Dark">
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Left"/>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Center"/>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Right"/>
+                                        </ComboBoxItem>
+                                    </interfaz:ComboBox2>
+                                </Grid>
+                                <Grid Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Uid="WidgetImageOrientationVertical" Grid.Column="0" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                    <interfaz:ComboBox2 x:Name="cbWidgetPrecargaImagenOrientacionVertical" Grid.Column="1" CornerRadius="5" RequestedTheme="Dark">
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Top"/>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Center"/>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem>
+                                            <TextBlock x:Uid="Bottom"/>
+                                        </ComboBoxItem>
+                                    </interfaz:ComboBox2>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
+
+                                    <interfaz:Button2 x:Name="botonWidgetPrecargaCargarStreaming" Background="{StaticResource ColorPrimario}" RequestedTheme="Light" Padding="15" IsEnabled="False" CornerRadius="5">
+                                        <interfaz:Button2.Content>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock x:Uid="WidgetLoadStreaming" Foreground="{StaticResource ColorFuente}"/>
+                                            </StackPanel>
+                                        </interfaz:Button2.Content>
+                                    </interfaz:Button2>
+
+                                    <TextBlock x:Name="tbWidgetCargarStreamingMensaje" Foreground="{StaticResource ColorFuente}" Margin="0,30,0,0" Visibility="Collapsed"/>
+                                </StackPanel>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
@@ -420,123 +460,186 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0" Orientation="Vertical" Padding="40,50,20,40" HorizontalAlignment="Stretch">
-                        <TextBlock x:Uid="Options2" Foreground="{StaticResource ColorFuente}" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <StackPanel x:Name="spOpcionesBotones" Grid.Column="0" Orientation="Vertical" Padding="40" HorizontalAlignment="Stretch" MinWidth="300">
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5">
+                            <interfaz:Button2.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                        <interfaz:Button2 x:Name="botonOpcionesMoverNetflix" Background="Transparent" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" HorizontalAlignment="Stretch">
-                            <interfaz:Button2.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Netflix" Foreground="{StaticResource ColorFuente}"/>
-                                </StackPanel>
+                                    <Image Source="Assets/Plataformas/logo_netflix.png" Grid.Column="0" MaxHeight="18" MaxWidth="18" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Netflix" Grid.Column="1" Foreground="{StaticResource ColorFuente}" Margin="20,0,0,0"/>
+                                </Grid>
                             </interfaz:Button2.Content>
                         </interfaz:Button2>
-                        <interfaz:Button2 x:Name="botonOpcionesMoverPrimeVideo" Background="Transparent" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" HorizontalAlignment="Stretch">
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,10,0,0">
                             <interfaz:Button2.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Prime Video" Foreground="{StaticResource ColorFuente}"/>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="Assets/Plataformas/logo_primevideo.png" Grid.Column="0" MaxHeight="18" MaxWidth="18" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Prime Video" Grid.Column="1" Foreground="{StaticResource ColorFuente}" Margin="20,0,0,0"/>
+                                </Grid>
                             </interfaz:Button2.Content>
                         </interfaz:Button2>
-                        <interfaz:Button2 x:Name="botonOpcionesMoverSpotify" Background="Transparent" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" HorizontalAlignment="Stretch">
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,10,0,0">
                             <interfaz:Button2.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Spotify" Foreground="{StaticResource ColorFuente}"/>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Source="Assets/Plataformas/logo_spotify.png" Grid.Column="0" MaxHeight="18" MaxWidth="18" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Spotify" Grid.Column="1" Foreground="{StaticResource ColorFuente}" Margin="20,0,0,0"/>
+                                </Grid>
                             </interfaz:Button2.Content>
                         </interfaz:Button2>
-                        <interfaz:Button2 x:Name="botonOpcionesMoverIdioma" Background="Transparent" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" HorizontalAlignment="Stretch">
+                        <interfaz:Button2 Background="Transparent" Padding="18,15" RequestedTheme="Light" BorderThickness="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" CornerRadius="5" Margin="0,10,0,0">
                             <interfaz:Button2.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Uid="OptionsLanguage" Foreground="{StaticResource ColorFuente}"/>
-                                </StackPanel>
-                            </interfaz:Button2.Content>
-                        </interfaz:Button2>
-                        <interfaz:Button2 x:Name="botonOpcionesMoverAplicacion" Background="Transparent" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" HorizontalAlignment="Stretch">
-                            <interfaz:Button2.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Uid="OptionsApp" Foreground="{StaticResource ColorFuente}"/>
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <iconos:FontAwesome Icon="Solid_Computer" Grid.Column="0" Foreground="{StaticResource ColorFuente}" HorizontalAlignment="Center"/>
+                                    <TextBlock x:Uid="OptionsApp" Grid.Column="1" Foreground="{StaticResource ColorFuente}" Margin="20,0,0,0"/>
+                                </Grid>
                             </interfaz:Button2.Content>
                         </interfaz:Button2>
                     </StackPanel>
 
-                    <ScrollViewer x:Name="svOpciones" Grid.Column="1" VerticalScrollBarVisibility="Visible" Padding="0,0,15,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                        <StackPanel Orientation="Vertical" Padding="40">
-                            <Expander x:Name="expanderOpcionesNetflix" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" Margin="0,0,0,40">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                        <Image Source="Assets/Plataformas/logo_netflix.png" MaxHeight="18" MaxWidth="18" Margin="0,0,15,0"/>
-                                        <TextBlock Text="Netflix" Foreground="{StaticResource ColorFuente}"/>
-                                    </StackPanel>
-                                </Expander.Header>
+                    <ScrollViewer x:Name="svOpciones" Grid.Column="1" VerticalScrollBarVisibility="Visible" Padding="0,0,5,0" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                        <StackPanel x:Name="spOpcionesPestanas" Orientation="Vertical" Padding="40">
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                 <Grid Padding="30" CornerRadius="5">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
 
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="OptionsLaunch" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                                    <TextBlock x:Uid="OptionsLaunch" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
 
-                                    <interfaz:ComboBox2 x:Name="cbOpcionesNetflixModo" RequestedTheme="Dark" CornerRadius="5">
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesNetflixModo" Grid.Column="1" RequestedTheme="Dark" CornerRadius="5">
                                         <TextBlock x:Uid="OptionsLaunchWebBrower"/>
                                         <TextBlock x:Uid="OptionsLaunchApp"/>
                                     </interfaz:ComboBox2>
+                                </Grid>
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Uid="NetflixOptionsSearchAPI" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                        <interfaz:Button2 x:Name="botonOpcionesNetflixAPIAyuda" Grid.Column="1" Background="{StaticResource ColorPrimario}" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5">
+                                            <interfaz:Button2.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Uid="SpotifyOptionsHelp" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </interfaz:Button2.Content>
+                                        </interfaz:Button2>
+                                    </Grid>
+
+                                    <Grid Margin="0,30,0,20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="API ID:" Grid.Column="0" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" Margin="0,0,15,0" HorizontalAlignment="Right"/>
+                                        <TextBox x:Name="tbOpcionesNetflixAPIID" Grid.Column="1" RequestedTheme="Dark"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Search ID:" Grid.Column="0" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center" Margin="0,0,15,0" HorizontalAlignment="Right"/>
+                                        <TextBox x:Name="tbOpcionesNetflixSearchID" Grid.Column="1" RequestedTheme="Dark"/>
+                                    </Grid>
                                 </StackPanel>
-                            </Expander>
+                            </StackPanel>
 
-                            <Expander x:Name="expanderOpcionesPrimeVideo" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" Margin="0,0,0,40">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                        <Image Source="Assets/Plataformas/logo_primevideo.png" MaxHeight="18" MaxWidth="18" Margin="0,0,15,0"/>
-                                        <TextBlock Text="Prime Video" Foreground="{StaticResource ColorFuente}"/>
-                                    </StackPanel>
-                                </Expander.Header>
-
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
-
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="OptionsLaunch" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-
-                                    <interfaz:ComboBox2 x:Name="cbOpcionesPrimeVideoModo" RequestedTheme="Dark" CornerRadius="5">
-                                        <TextBlock x:Uid="OptionsLaunchWebBrower"/>
-                                        <TextBlock x:Uid="OptionsLaunchApp"/>
-                                    </interfaz:ComboBox2>
-                                </StackPanel>
-                            </Expander>
-
-                            <Expander x:Name="expanderOpcionesSpotify" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" Margin="0,0,0,40">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                        <Image Source="Assets/Plataformas/logo_spotify.png" MaxHeight="18" MaxWidth="18" Margin="0,0,15,0"/>
-                                        <TextBlock Text="Spotify" Foreground="{StaticResource ColorFuente}"/>
-                                    </StackPanel>
-                                </Expander.Header>
-
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
-
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="OptionsLaunch" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-
-                                    <interfaz:ComboBox2 x:Name="cbOpcionesSpotifyModo" RequestedTheme="Dark" Margin="0,0,0,30" CornerRadius="5">
-                                        <TextBlock x:Uid="OptionsLaunchWebBrower"/>
-                                        <TextBlock x:Uid="OptionsLaunchApp"/>
-                                    </interfaz:ComboBox2>
-
-                                    <TextBlock x:Uid="SpotifyOptions" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-
-                                    <interfaz:Button2 x:Name="botonOpcionesSpotifyAbrirAyuda" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5" Margin="0,0,0,20">
-                                        <interfaz:Button2.Content>
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock x:Uid="SpotifyOptionsHelp" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center"/>
-                                            </StackPanel>
-                                        </interfaz:Button2.Content>
-                                    </interfaz:Button2>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <Grid Padding="30" CornerRadius="5">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
                                     
-                                    <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Uid="OptionsLaunch" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesPrimeVideoModo" Grid.Column="1" RequestedTheme="Dark" CornerRadius="5">
+                                        <TextBlock x:Uid="OptionsLaunchWebBrower"/>
+                                        <TextBlock x:Uid="OptionsLaunchApp"/>
+                                    </interfaz:ComboBox2>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <Grid Padding="30" CornerRadius="5">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
+                                    
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Uid="OptionsLaunch" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesSpotifyModo" Grid.Column="1" RequestedTheme="Dark" CornerRadius="5">
+                                        <TextBlock x:Uid="OptionsLaunchWebBrower"/>
+                                        <TextBlock x:Uid="OptionsLaunchApp"/>
+                                    </interfaz:ComboBox2>
+                                </Grid>
+
+                                <StackPanel Orientation="Vertical" Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <StackPanel.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </StackPanel.Background>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock x:Uid="SpotifyOptions" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                                        <interfaz:Button2 x:Name="botonOpcionesSpotifyAbrirAyuda" Grid.Column="1" Background="{StaticResource ColorPrimario}" Padding="15,12" RequestedTheme="Light" BorderThickness="0" CornerRadius="5">
+                                            <interfaz:Button2.Content>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock x:Uid="SpotifyOptionsHelp" Foreground="{StaticResource ColorFuente}" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </interfaz:Button2.Content>
+                                        </interfaz:Button2>
+                                    </Grid>
+
+                                    <Grid Margin="0,30,0,20">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="100"/>
                                             <ColumnDefinition Width="*"/>
@@ -555,48 +658,62 @@
                                         <TextBox x:Name="tbOpcionesSpotifyClienteSecreto" Grid.Column="1" RequestedTheme="Dark"/>
                                     </Grid>
                                 </StackPanel>
-                            </Expander>
+                                
+                            </StackPanel>
 
-                            <Expander x:Name="expanderOpcionesIdioma" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5" Margin="0,0,0,40">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                        <iconos:FontAwesome Icon="Solid_EarthEurope" Foreground="{StaticResource ColorFuente}" Margin="0,0,15,0"/>
-                                        <TextBlock x:Uid="OptionsLanguage" Foreground="{StaticResource ColorFuente}"/>
+                            <StackPanel Orientation="Vertical" Visibility="Collapsed">
+                                <Grid Padding="30" CornerRadius="5">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,20,0">
+                                        <TextBlock x:Uid="OptionsLanguageInfo" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                        <TextBlock x:Uid="OptionsLanguageInfo2" FontSize="13" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,0"/>
                                     </StackPanel>
-                                </Expander.Header>
 
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesIdioma" Grid.Column="1" RequestedTheme="Dark" CornerRadius="5"/>
+                                </Grid>
 
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="OptionsLanguageInfo" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-                                    <interfaz:ComboBox2 x:Name="cbOpcionesIdioma" RequestedTheme="Dark" CornerRadius="5"/>
-                                </StackPanel>
-                            </Expander>
+                                <Grid Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
 
-                            <Expander x:Name="expanderOpcionesAplicacion" IsExpanded="True" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" RequestedTheme="Dark" CornerRadius="5">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                                        <iconos:FontAwesome Icon="Solid_Computer" Foreground="{StaticResource ColorFuente}" Margin="0,0,15,0"/>
-                                        <TextBlock x:Uid="OptionsApp" Foreground="{StaticResource ColorFuente}"/>
-                                    </StackPanel>
-                                </Expander.Header>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Expander.Background>
-                                    <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
-                                </Expander.Background>
-
-                                <StackPanel Orientation="Vertical" Padding="10">
-                                    <TextBlock x:Uid="OptionsAppWindowInfo" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-                                    <interfaz:ComboBox2 x:Name="cbOpcionesPantalla" RequestedTheme="Dark" Margin="0,0,0,25" CornerRadius="5">
+                                    <TextBlock x:Uid="OptionsAppWindowInfo" Grid.Column="0" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                                    <interfaz:ComboBox2 x:Name="cbOpcionesPantalla" Grid.Column="1" RequestedTheme="Dark" CornerRadius="5">
                                         <TextBlock x:Uid="OptionsAppWindow1"/>
                                         <TextBlock x:Uid="OptionsAppWindow2"/>
                                         <TextBlock x:Uid="OptionsAppWindow3"/>
                                     </interfaz:ComboBox2>
+                                </Grid>
 
-                                    <TextBlock x:Uid="OptionsAppCleanInfo" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" Margin="0,0,0,20"/>
-                                    <interfaz:Button2 x:Name="botonOpcionesLimpiar" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5">
+                                <Grid Padding="30" CornerRadius="5" Margin="0,5,0,0">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{StaticResource ColorPrimario}" Opacity="0.6"/>
+                                    </Grid.Background>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,20,0">
+                                        <TextBlock x:Uid="OptionsAppCleanInfo" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                        <TextBlock x:Uid="OptionsAppCleanInfo2" FontSize="13" Foreground="{StaticResource ColorFuente}" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,5,0,0"/>
+                                    </StackPanel>
+
+                                    <interfaz:Button2 x:Name="botonOpcionesLimpiar" Grid.Column="1" Background="{StaticResource ColorPrimario}" Padding="15,12,15,14" RequestedTheme="Light" BorderThickness="0" CornerRadius="5">
                                         <interfaz:Button2.Content>
                                             <StackPanel Orientation="Horizontal">
                                                 <iconos:FontAwesome Icon="Solid_Trash" Foreground="{StaticResource ColorFuente}" FontSize="15"/>
@@ -604,8 +721,8 @@
                                             </StackPanel>
                                         </interfaz:Button2.Content>
                                     </interfaz:Button2>
-                                </StackPanel>
-                            </Expander>
+                                </Grid>
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

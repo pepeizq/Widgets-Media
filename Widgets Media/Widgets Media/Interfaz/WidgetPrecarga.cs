@@ -1,9 +1,16 @@
 ﻿using Herramientas;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Plantillas;
+using System;
 using System.Text.Json;
+using System.Threading;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.System;
+using Windows.UI;
 using static Widgets_Media.MainWindow;
 
 namespace Interfaz
@@ -12,9 +19,29 @@ namespace Interfaz
     {
         public static void Cargar()
         {
+            int i = 0;
+            foreach (object boton in ObjetosVentana.spWidgetPrecargaBotones.Children)
+            {
+                if (boton.GetType() == typeof(Button2))
+                {
+                    Button2 boton2 = (Button2)boton;
+
+                    boton2.Tag = i;
+                    boton2.Click += CambiarPestaña;
+                    boton2.PointerEntered += Animaciones.EntraRatonBoton2;
+                    boton2.PointerExited += Animaciones.SaleRatonBoton2;
+
+                    i += 1;
+                }
+            }
+
+            //---------------------------------
+
             ObjetosVentana.tbWidgetPrecargaEjecutable.TextChanged += ActivarBotonCargaStreaming;
             ObjetosVentana.tbWidgetPrecargaImagenPequeña.TextChanged += ActualizarImagenPequeña;
             ObjetosVentana.tbWidgetPrecargaImagenGrande.TextChanged += ActualizarImagenGrande;
+
+            //---------------------------------
 
             ObjetosVentana.cbWidgetPrecargaImagen.SelectionChanged += CambiarImagenElegida;
             ObjetosVentana.cbWidgetPrecargaImagen.PointerEntered += Animaciones.EntraRatonComboCaja2;
@@ -26,9 +53,52 @@ namespace Interfaz
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.PointerEntered += Animaciones.EntraRatonComboCaja2;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.PointerExited += Animaciones.SaleRatonComboCaja2;
 
+            //---------------------------------
+
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.Click += CargarMedia;
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerExited += Animaciones.SaleRatonBoton2;
+        }
+
+        private static void CambiarPestaña(object sender, RoutedEventArgs e)
+        {
+            Button2 botonPulsado = sender as Button2;
+            int pestañaMostrar = (int)botonPulsado.Tag;
+            CambiarPestaña(pestañaMostrar);
+        }
+
+        private static void CambiarPestaña(int botonPulsado)
+        {
+            SolidColorBrush colorPulsado = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]);
+            colorPulsado.Opacity = 0.6;
+
+            int i = 0;
+            foreach (object boton in ObjetosVentana.spWidgetPrecargaBotones.Children)
+            {
+                if (boton.GetType() == typeof(Button2))
+                {
+                    Button2 boton2 = (Button2)boton;
+
+                    if (i == botonPulsado)
+                    {
+                        boton2.Background = colorPulsado;
+                    }
+                    else
+                    {
+                        boton2.Background = new SolidColorBrush(Colors.Transparent);
+                    }
+
+                    i += 1;
+                }                  
+            }
+
+            foreach (StackPanel sp in ObjetosVentana.spWidgetPrecargaPestañas.Children)
+            {
+                sp.Visibility = Visibility.Collapsed;
+            }
+
+            StackPanel spMostrar = ObjetosVentana.spWidgetPrecargaPestañas.Children[botonPulsado] as StackPanel;
+            spMostrar.Visibility = Visibility.Visible;
         }
 
         private static void ActivarBotonCargaStreaming(object sender, TextChangedEventArgs e)
@@ -138,13 +208,9 @@ namespace Interfaz
         }
 
         private static void CambiarImagenElegida(object sender, SelectionChangedEventArgs e)
-        {
-            ResourceLoader recursos = new ResourceLoader();
-
+        {           
             if (ObjetosVentana.cbWidgetPrecargaImagen.SelectedIndex == 0)
-            {
-                ObjetosVentana.tbWidgetPrecargaMensajeImagen.Text = recursos.GetString("ChooseImageSmall");
-                
+            {               
                 try
                 {
                     ObjetosVentana.imagenWidgetPrecargaElegida.Source = ObjetosVentana.tbWidgetPrecargaImagenPequeña.Text;
@@ -153,8 +219,6 @@ namespace Interfaz
             }
             else if (ObjetosVentana.cbWidgetPrecargaImagen.SelectedIndex == 1)
             {
-                ObjetosVentana.tbWidgetPrecargaMensajeImagen.Text = recursos.GetString("ChooseImageBig");
-
                 try
                 {
                     ObjetosVentana.imagenWidgetPrecargaElegida.Source = ObjetosVentana.tbWidgetPrecargaImagenGrande.Text;
@@ -170,20 +234,35 @@ namespace Interfaz
 
             if (nombre != null)
             {
-                ObjetosVentana.expanderWidgetPrecargaDatos.IsExpanded = false;
+                CambiarPestaña(1);
                 ObjetosVentana.tbWidgetPrecargaTitulo.Text = nombre;
                 ObjetosVentana.tbWidgetPrecargaTitulo.Visibility = Visibility.Visible;
             }
             else
             {
-                ObjetosVentana.expanderWidgetPrecargaDatos.IsExpanded = true;
+                CambiarPestaña(0);
                 ObjetosVentana.tbWidgetPrecargaTitulo.Visibility = Visibility.Collapsed;
             }
 
             ObjetosVentana.tbWidgetPrecargaEjecutable.Text = ejecutable;
-            ObjetosVentana.tbWidgetPrecargaArgumentos.Text = argumentos;
-            ObjetosVentana.tbWidgetPrecargaImagenPequeña.Text = imagenPequeña;
-            ObjetosVentana.tbWidgetPrecargaImagenGrande.Text = imagenMedianaGrande;
+
+            if (imagenPequeña != null) 
+            {
+                ObjetosVentana.tbWidgetPrecargaImagenPequeña.Text = imagenPequeña.Trim();
+            }
+            else
+            {
+                ObjetosVentana.tbWidgetPrecargaImagenPequeña.Text = null;
+            }
+
+            if (imagenMedianaGrande != null)
+            {
+                ObjetosVentana.tbWidgetPrecargaImagenGrande.Text = imagenMedianaGrande.Trim();
+            }
+            else
+            {
+                ObjetosVentana.tbWidgetPrecargaImagenGrande.Text = null;
+            }
 
             ActivarBotonCargaStreaming();
 
@@ -212,11 +291,6 @@ namespace Interfaz
 
             Media json = JsonSerializer.Deserialize<Media>(plantilla);
             json.enlace = ObjetosVentana.tbWidgetPrecargaEjecutable.Text.Trim();
-
-            if (ObjetosVentana.tbWidgetPrecargaArgumentos.Text.Trim().Length > 0)
-            {
-                json.argumentos = ObjetosVentana.tbWidgetPrecargaArgumentos.Text.Trim();
-            }
             
             //------------------------------------------------
 
@@ -287,14 +361,14 @@ namespace Interfaz
         private static void ActivarDesactivar(bool estado)
         {
             ObjetosVentana.tbWidgetPrecargaEjecutable.IsEnabled = estado;
-            ObjetosVentana.tbWidgetPrecargaArgumentos.IsEnabled = estado;
             ObjetosVentana.tbWidgetPrecargaImagenPequeña.IsEnabled = estado;
             ObjetosVentana.tbWidgetPrecargaImagenGrande.IsEnabled = estado;
 
             ObjetosVentana.cbWidgetPrecargaImagen.IsEnabled = estado;
-
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionHorizontal.IsEnabled = estado;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.IsEnabled = estado;
+
+            ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = estado;
         }
     }
 }

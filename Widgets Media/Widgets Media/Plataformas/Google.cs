@@ -1,7 +1,10 @@
 ﻿using Google.Apis.CustomSearchAPI.v1.Data;
 using Google.Apis.CustomSearchAPI.v1;
 using Google.Apis.Services;
+using Microsoft.UI.Xaml;
 using System.Collections.Generic;
+using static Widgets_Media.MainWindow;
+using Microsoft.Windows.ApplicationModel.Resources;
 
 namespace Plataformas
 {
@@ -9,7 +12,7 @@ namespace Plataformas
     {
         //https://programmablesearchengine.google.com/controlpanel/all
 
-        public static List<string> Buscar(string cosaBuscar, string motorBusquedaID)
+        public static List<string> Buscar(string cosaBuscar, string motorBusquedaID, string plataforma)
         {
             string apiClave = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
 
@@ -22,17 +25,40 @@ namespace Plataformas
 
             IList<Result> resultados = new List<Result>();
             int i = 0;
-            while (resultados != null && enlacesResultados.Count < 50)
+            while (resultados != null && i < 3)
             {
                 peticion.Start = i * 10 + 1;
-                resultados = peticion.Execute().Items;
 
-                if (resultados != null)
+                try
                 {
-                    foreach (Result resultado in resultados)
+                    resultados = peticion.Execute().Items;
+
+                    if (resultados != null)
                     {
-                        enlacesResultados.Add(resultado.Link);
+                        foreach (Result resultado in resultados)
+                        {
+                            enlacesResultados.Add(resultado.Link);
+                        }
                     }
+                }
+                catch 
+                {
+                    ResourceLoader recursos = new ResourceLoader();
+
+                    if (plataforma == "netflix")
+                    {
+                        ObjetosVentana.ttNetflixErrorBuscar.Title = recursos.GetString("NetflixError");
+                        ObjetosVentana.ttNetflixErrorBuscar.Subtitle = recursos.GetString("SearchError");
+                        ObjetosVentana.ttNetflixErrorBuscar.IsOpen = true;
+                    }
+                    else if (plataforma == "disney")
+                    {
+                        ObjetosVentana.ttDisneyErrorBuscar.Title = recursos.GetString("DisneyPlusError");
+                        ObjetosVentana.ttDisneyErrorBuscar.Subtitle = recursos.GetString("SearchError");
+                        ObjetosVentana.ttDisneyErrorBuscar.IsOpen = true;
+                    }
+
+                    break;
                 }
 
                 i += 1;

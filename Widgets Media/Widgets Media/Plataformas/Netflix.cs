@@ -55,7 +55,7 @@ namespace Plataformas
                 ObjetosVentana.gvNetflixResultados.Items.Clear();
 
                 await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), "e6760ff33b21c479a");
+                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), "e6760ff33b21c479a", "netflix");
 
                 if (resultados.Count > 0)
                 {

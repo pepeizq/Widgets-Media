@@ -4,15 +4,20 @@ using Interfaz;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.System;
 using Windows.UI;
 using static Widgets_Media.MainWindow;
 
 namespace Plataformas
 {
+    //https://disney.content.edge.bamgrid.com/svc/content/DmcSeriesBundle/version/5.1/region/ES/audience/k-false,l-true/maturity/1850/language/es-ES/encodedSeriesId/3jLIGMDYINqD
+    //https://disney.content.edge.bamgrid.com/svc/content/DmcVideoBundle/version/5.1/region/US/audience/k-false,l-true/maturity/1850/language/en-US/encodedFamilyId/7MAONYZ92wDT
+
     public static class DisneyPlus
     {
         public static void Cargar()
@@ -20,9 +25,24 @@ namespace Plataformas
             ObjetosVentana.botonDisneyPlusBuscar.Click += BuscarClick;
             ObjetosVentana.botonDisneyPlusBuscar.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonDisneyPlusBuscar.PointerExited += Animaciones.SaleRatonBoton2;
+
+            ObjetosVentana.tbDisneyPlusBuscar.KeyDown += BuscarPulsar;
         }
 
-        private static async void BuscarClick(object sender, RoutedEventArgs e)
+        private static void BuscarClick(object sender, RoutedEventArgs e)
+        {
+            Buscar();
+        }
+
+        private static void BuscarPulsar(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                Buscar();
+            }
+        }
+
+        private async static void Buscar()
         {
             if (ObjetosVentana.tbDisneyPlusBuscar.Text.Trim().Length > 3)
             {
@@ -32,7 +52,8 @@ namespace Plataformas
                 ObjetosVentana.gvDisneyPlusResultados.Items.Clear();
 
                 await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbDisneyPlusBuscar.Text.Trim(), "4131afa3b274f44e2");
+                List<string> resultados = Google.Buscar(ObjetosVentana.tbDisneyPlusBuscar.Text.Trim(), "4131afa3b274f44e2", "disney");
+                List<string> repetidos = new List<string>();
 
                 if (resultados.Count > 0)
                 {
@@ -59,8 +80,33 @@ namespace Plataformas
 
                                     streaming.nombre = temp2.Trim();
 
-                                    if (streaming.nombre != "All Series and TV Shows")
+                                    bool añadir = true;
+
+                                    if (streaming.nombre == "All Series and TV Shows")
                                     {
+                                        añadir = false;
+                                    }
+                                    else if (streaming.nombre == "All Movies")
+                                    {
+                                        añadir = false;
+                                    }
+
+                                    if (repetidos.Count > 0)
+                                    {
+                                        foreach (string repetido in repetidos)
+                                        {
+                                            if (repetido == streaming.nombre)
+                                            {
+                                                añadir = false;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    if (añadir == true)
+                                    {
+                                        repetidos.Add(streaming.nombre);
+
                                         int int3 = html.IndexOf("<meta property=" + Strings.ChrW(34) + "og:image" + Strings.ChrW(34));
                                         string temp3 = html.Remove(0, int3);
 
@@ -69,6 +115,12 @@ namespace Plataformas
 
                                         int int5 = temp4.IndexOf(Strings.ChrW(34));
                                         string temp5 = temp4.Remove(int5, temp4.Length - int5);
+
+                                        if (temp5.Contains("scale?width") == true)
+                                        {
+                                            int int10 = temp5.IndexOf("scale?width");
+                                            temp5 = temp5.Remove(int10, temp5.Length - int10);
+                                        }
 
                                         streaming.imagenPequeña = temp5.Trim();
 
@@ -80,6 +132,12 @@ namespace Plataformas
 
                                         int int8 = temp7.IndexOf(Strings.ChrW(34));
                                         string temp8 = temp7.Remove(int8, temp7.Length - int8);
+
+                                        if (temp8.Contains("scale?width") == true)
+                                        {
+                                            int int11 = temp8.IndexOf("scale?width");
+                                            temp8 = temp8.Remove(int11, temp8.Length - int11);
+                                        }
 
                                         streaming.imagenMedianayGrande = temp8.Trim();
 

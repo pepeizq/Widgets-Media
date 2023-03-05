@@ -4,12 +4,13 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Plataformas;
+using System;
 using Expander = Microsoft.UI.Xaml.Controls.Expander;
 
 namespace Widgets_Media
 {
     public sealed partial class MainWindow : Window
-    {
+    {        
         public MainWindow()
         {
             this.InitializeComponent();
@@ -69,15 +70,20 @@ namespace Widgets_Media
             ObjetosVentana.svNetflixResultados = svNetflixResultados;
             ObjetosVentana.prNetflixResultados = prNetflixResultados;
             ObjetosVentana.gvNetflixResultados = gvNetflixResultados;
+            ObjetosVentana.ttNetflixErrorBuscar = ttNetflixErrorBuscar;
             ObjetosVentana.cbOpcionesNetflixModo = cbOpcionesNetflixModo;
+            ObjetosVentana.botonOpcionesNetflixAPIAyuda = botonOpcionesNetflixAPIAyuda;
+            ObjetosVentana.tbOpcionesNetflixAPIID = tbOpcionesNetflixAPIID;
+            ObjetosVentana.tbOpcionesNetflixSearchID = tbOpcionesNetflixSearchID;
 
             //-------------------------------------------------------------------
-            
+
             ObjetosVentana.botonDisneyPlusBuscar = botonDisneyPlusBuscar;
             ObjetosVentana.tbDisneyPlusBuscar = tbDisneyPlusBuscar;
             ObjetosVentana.svDisneyPlusResultados = svDisneyPlusResultados;
             ObjetosVentana.prDisneyPlusResultados = prDisneyPlusResultados;
             ObjetosVentana.gvDisneyPlusResultados = gvDisneyPlusResultados;
+            ObjetosVentana.ttDisneyErrorBuscar = ttDisneyErrorBuscar;
 
             //-------------------------------------------------------------------
 
@@ -106,16 +112,14 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
+            ObjetosVentana.spWidgetPrecargaBotones = spWidgetPrecargaBotones;
             ObjetosVentana.svWidgetPrecarga = svWidgetPrecarga;
+            ObjetosVentana.spWidgetPrecargaPestañas = spWidgetPrecargaPestanas;
             ObjetosVentana.tbWidgetPrecargaTitulo = tbWidgetPrecargaTitulo;
-            ObjetosVentana.expanderWidgetPrecargaDatos = expanderWidgetPrecargaDatos;
             ObjetosVentana.tbWidgetPrecargaEjecutable = tbWidgetPrecargaEjecutable;
-            ObjetosVentana.tbWidgetPrecargaArgumentos = tbWidgetPrecargaArgumentos;
-            ObjetosVentana.tbWidgetPrecargaImagenPequeña = tbWidgetPrecargaPequena;
-            ObjetosVentana.tbWidgetPrecargaImagenGrande = tbWidgetPrecargaGrande;
-            ObjetosVentana.expanderWidgetPrecargaPersonalizacion = expanderWidgetPrecargaPersonalizacion;
+            ObjetosVentana.tbWidgetPrecargaImagenPequeña = tbWidgetPrecargaImagenPequena;
+            ObjetosVentana.tbWidgetPrecargaImagenGrande = tbWidgetPrecargaImagenGrande;
             ObjetosVentana.cbWidgetPrecargaImagen = cbWidgetPrecargaImagen;
-            ObjetosVentana.tbWidgetPrecargaMensajeImagen = tbWidgetPrecargaMensajeImagen;
             ObjetosVentana.imagenWidgetPrecargaElegida = imagenWidgetPrecargaElegida;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionHorizontal = cbWidgetPrecargaImagenOrientacionHorizontal;
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical = cbWidgetPrecargaImagenOrientacionVertical;
@@ -124,20 +128,9 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
-            ObjetosVentana.botonOpcionesMoverNetflix = botonOpcionesMoverNetflix;
-            ObjetosVentana.botonOpcionesMoverPrimeVideo = botonOpcionesMoverPrimeVideo;
-            ObjetosVentana.botonOpcionesMoverSpotify = botonOpcionesMoverSpotify;
-            ObjetosVentana.botonOpcionesMoverIdioma = botonOpcionesMoverIdioma;
-            ObjetosVentana.botonOpcionesMoverAplicacion = botonOpcionesMoverAplicacion;
-            ObjetosVentana.expanderOpcionesNetflix = expanderOpcionesNetflix;
-            ObjetosVentana.expanderOpcionesPrimeVideo = expanderOpcionesPrimeVideo;
-            ObjetosVentana.expanderOpcionesSpotify = expanderOpcionesSpotify;
-            ObjetosVentana.expanderOpcionesIdioma = expanderOpcionesIdioma;
-            ObjetosVentana.expanderOpcionesAplicacion = expanderOpcionesAplicacion;
-
-            //-------------------------------------------------------------------
-
+            ObjetosVentana.spOpcionesBotones = spOpcionesBotones;
             ObjetosVentana.svOpciones = svOpciones;
+            ObjetosVentana.spOpcionesPestañas = spOpcionesPestanas;
             ObjetosVentana.cbOpcionesIdioma = cbOpcionesIdioma;
             ObjetosVentana.cbOpcionesPantalla = cbOpcionesPantalla;
             ObjetosVentana.botonOpcionesLimpiar = botonOpcionesLimpiar;
@@ -178,7 +171,11 @@ namespace Widgets_Media
             public static ScrollViewer svNetflixResultados { get; set; }
             public static ProgressRing prNetflixResultados { get; set; }
             public static AdaptiveGridView gvNetflixResultados { get; set; }
+            public static TeachingTip ttNetflixErrorBuscar { get; set; }
             public static ComboBox cbOpcionesNetflixModo { get; set; }
+            public static Button botonOpcionesNetflixAPIAyuda { get; set; }
+            public static TextBox tbOpcionesNetflixAPIID { get; set; }
+            public static TextBox tbOpcionesNetflixSearchID { get; set; }
 
             //-------------------------------------------------------------------
             public static Button botonDisneyPlusBuscar { get; set; }
@@ -186,6 +183,7 @@ namespace Widgets_Media
             public static ScrollViewer svDisneyPlusResultados { get; set; }
             public static ProgressRing prDisneyPlusResultados { get; set; }
             public static AdaptiveGridView gvDisneyPlusResultados { get; set; }
+            public static TeachingTip ttDisneyErrorBuscar { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -214,16 +212,14 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
+            public static StackPanel spWidgetPrecargaBotones { get; set; }
             public static ScrollViewer svWidgetPrecarga { get; set; }
+            public static StackPanel spWidgetPrecargaPestañas { get; set; }
             public static TextBlock tbWidgetPrecargaTitulo { get; set; }
-            public static Expander expanderWidgetPrecargaDatos { get; set; }
             public static TextBox tbWidgetPrecargaEjecutable { get; set; }
-            public static TextBox tbWidgetPrecargaArgumentos { get; set; }
             public static TextBox tbWidgetPrecargaImagenPequeña { get; set; }
             public static TextBox tbWidgetPrecargaImagenGrande { get; set; }
-            public static Expander expanderWidgetPrecargaPersonalizacion { get; set; }
             public static ComboBox cbWidgetPrecargaImagen { get; set; }
-            public static TextBlock tbWidgetPrecargaMensajeImagen { get; set; }
             public static ImageEx imagenWidgetPrecargaElegida { get; set; }
             public static ComboBox cbWidgetPrecargaImagenOrientacionHorizontal { get; set; }
             public static ComboBox cbWidgetPrecargaImagenOrientacionVertical { get; set; }
@@ -232,20 +228,9 @@ namespace Widgets_Media
 
             //-------------------------------------------------------------------
 
-            public static Button botonOpcionesMoverNetflix { get; set; }
-            public static Button botonOpcionesMoverPrimeVideo { get; set; }
-            public static Button botonOpcionesMoverSpotify { get; set; }
-            public static Button botonOpcionesMoverIdioma { get; set; }
-            public static Button botonOpcionesMoverAplicacion { get; set; }
-            public static Expander expanderOpcionesNetflix { get; set; }
-            public static Expander expanderOpcionesPrimeVideo { get; set; }
-            public static Expander expanderOpcionesSpotify { get; set; }
-            public static Expander expanderOpcionesIdioma { get; set; }
-            public static Expander expanderOpcionesAplicacion { get; set; }
-
-            //-------------------------------------------------------------------
-
+            public static StackPanel spOpcionesBotones { get; set; }
             public static ScrollViewer svOpciones { get; set; }
+            public static StackPanel spOpcionesPestañas { get; set; }
             public static ComboBox cbOpcionesIdioma { get; set; }
             public static ComboBox cbOpcionesPantalla { get; set; }
             public static Button botonOpcionesLimpiar { get; set; }

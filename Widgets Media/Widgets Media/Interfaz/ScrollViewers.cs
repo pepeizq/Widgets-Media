@@ -21,22 +21,6 @@ namespace Interfaz
             ObjetosVentana.svSpotifyResultados.ViewChanging += MoverScroll;
             ObjetosVentana.svWidgetPrecarga.ViewChanging += MoverScroll;
             ObjetosVentana.svOpciones.ViewChanging += MoverScroll;
-
-            ObjetosVentana.botonOpcionesMoverNetflix.Click += MoverNetflix;
-            ObjetosVentana.botonOpcionesMoverNetflix.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverNetflix.PointerExited += Animaciones.SaleRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverPrimeVideo.Click += MoverPrimeVideo;
-            ObjetosVentana.botonOpcionesMoverPrimeVideo.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverPrimeVideo.PointerExited += Animaciones.SaleRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverSpotify.Click += MoverSpotify;
-            ObjetosVentana.botonOpcionesMoverSpotify.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverSpotify.PointerExited += Animaciones.SaleRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverIdioma.Click += MoverIdioma;
-            ObjetosVentana.botonOpcionesMoverIdioma.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverIdioma.PointerExited += Animaciones.SaleRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverAplicacion.Click += MoverAplicacion;
-            ObjetosVentana.botonOpcionesMoverAplicacion.PointerEntered += Animaciones.EntraRatonBoton2;
-            ObjetosVentana.botonOpcionesMoverAplicacion.PointerExited += Animaciones.SaleRatonBoton2;
         }
 
         private static void MoverScroll(object sender, ScrollViewerViewChangingEventArgs args)
@@ -97,31 +81,6 @@ namespace Interfaz
             {
                 ObjetosVentana.nvItemSubirArriba.Visibility = Visibility.Collapsed;
             }
-        }
-
-        public static void MoverNetflix(object sender, RoutedEventArgs e)
-        {
-            ObjetosVentana.svOpciones.ChangeView(null, ObjetosVentana.expanderOpcionesNetflix.ActualOffset.Y - 40, null);
-        }
-
-        public static void MoverPrimeVideo(object sender, RoutedEventArgs e)
-        {
-            ObjetosVentana.svOpciones.ChangeView(null, ObjetosVentana.expanderOpcionesPrimeVideo.ActualOffset.Y - 40, null);
-        }
-
-        public static void MoverSpotify(object sender, RoutedEventArgs e)
-        {
-            ObjetosVentana.svOpciones.ChangeView(null, ObjetosVentana.expanderOpcionesSpotify.ActualOffset.Y - 40, null);
-        }
-
-        public static void MoverIdioma(object sender, RoutedEventArgs e)
-        {
-            ObjetosVentana.svOpciones.ChangeView(null, ObjetosVentana.expanderOpcionesIdioma.ActualOffset.Y - 40, null);
-        }
-
-        public static void MoverAplicacion(object sender, RoutedEventArgs e)
-        {
-            ObjetosVentana.svOpciones.ChangeView(null, ObjetosVentana.expanderOpcionesAplicacion.ActualOffset.Y - 40, null);
         }
     }
 }
