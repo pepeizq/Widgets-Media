@@ -120,6 +120,12 @@
   <data name="AnyMedia" xml:space="preserve">
     <value>Any Streaming</value>
   </data>
+  <data name="APIID" xml:space="preserve">
+    <value>API Key</value>
+  </data>
+  <data name="APIIDOpen" xml:space="preserve">
+    <value>Open API Key</value>
+  </data>
   <data name="Bottom.Text" xml:space="preserve">
     <value>Bottom</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="DisneyPlusError" xml:space="preserve">
     <value>Error searching Disney+</value>
+  </data>
+  <data name="DisneyPlusOptionsSearchAPI.Text" xml:space="preserve">
+    <value>The application uses the Google API to search for Disney+ movies and series, given the limitations of this API it is easy to reach the daily limit and for that reason i give you the option to use the API with your Google account</value>
   </data>
   <data name="Executable.Text" xml:space="preserve">
     <value>Executable</value>
@@ -184,7 +193,7 @@
     <value>Error searching Netflix</value>
   </data>
   <data name="NetflixOptionsSearchAPI.Text" xml:space="preserve">
-    <value>The application uses the Google API to search for Netflix movies and series, given the limitations of this API it is easy to reach the daily limit and for that reason we give you the option to use the API with your Google account</value>
+    <value>The application uses the Google API to search for Netflix movies and series, given the limitations of this API it is easy to reach the daily limit and for that reason i give you the option to use the API with your Google account</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
@@ -243,6 +252,12 @@
   <data name="SearchError" xml:space="preserve">
     <value>There have been too many searches on the Google API that this app uses, but it can be changed from Options</value>
   </data>
+  <data name="SearchID" xml:space="preserve">
+    <value>Search Key</value>
+  </data>
+  <data name="SearchIDOpen" xml:space="preserve">
+    <value>Open Search Key</value>
+  </data>
   <data name="SpotifyAlbums.Text" xml:space="preserve">
     <value>Albums</value>
   </data>
@@ -276,6 +291,12 @@
   <data name="TrialMessage.Text" xml:space="preserve">
     <value>You are using a trial version of the app, you can only add 1 widget.</value>
   </data>
+  <data name="WidgetHelp.Text" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="WidgetHelp2.Text" xml:space="preserve">
+    <value>If you have questions about how to add the widget to the app, you can consult a guide on my website</value>
+  </data>
   <data name="WidgetImageOrientationHorizontal.Text" xml:space="preserve">
     <value>Horizontal image orientation</value>
   </data>
@@ -287,5 +308,8 @@
   </data>
   <data name="WidgetLoadStreamingMessage" xml:space="preserve">
     <value>Streaming widget loaded, open the Widgets app and add the streaming widget from 'Add Widgets'.</value>
+  </data>
+  <data name="WidgetOpenHelp.Text" xml:space="preserve">
+    <value>Open Guide</value>
   </data>
 </root>

@@ -58,6 +58,10 @@ namespace Interfaz
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.Click += CargarMedia;
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.PointerExited += Animaciones.SaleRatonBoton2;
+
+            ObjetosVentana.botonWidgetPrecargaAbrirAyuda.Click += AbrirAyuda;
+            ObjetosVentana.botonWidgetPrecargaAbrirAyuda.PointerEntered += Animaciones.EntraRatonBoton2;
+            ObjetosVentana.botonWidgetPrecargaAbrirAyuda.PointerExited += Animaciones.SaleRatonBoton2;
         }
 
         private static void CambiarPestaña(object sender, RoutedEventArgs e)
@@ -358,6 +362,11 @@ namespace Interfaz
             ActivarDesactivar(true);
         }
 
+        private static async void AbrirAyuda(object sender, RoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://pepeizqapps.com/app/widgets-for-streaming/#guide"));
+        }
+
         private static void ActivarDesactivar(bool estado)
         {
             ObjetosVentana.tbWidgetPrecargaEjecutable.IsEnabled = estado;
@@ -369,6 +378,7 @@ namespace Interfaz
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical.IsEnabled = estado;
 
             ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = estado;
+            ObjetosVentana.botonWidgetPrecargaAbrirAyuda.IsEnabled = estado;
         }
     }
 }

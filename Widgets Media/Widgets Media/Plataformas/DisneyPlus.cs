@@ -7,8 +7,11 @@ using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualBasic;
+using Microsoft.Windows.ApplicationModel.Resources;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using static Widgets_Media.MainWindow;
@@ -27,6 +30,127 @@ namespace Plataformas
             ObjetosVentana.botonDisneyPlusBuscar.PointerExited += Animaciones.SaleRatonBoton2;
 
             ObjetosVentana.tbDisneyPlusBuscar.KeyDown += BuscarPulsar;
+
+            ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+
+            if (datos.Values["OpcionesDisneyPlusAPIID"] == null)
+            {
+                ObjetosVentana.tbOpcionesDisneyPlusAPIID.Text = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
+                datos.Values["OpcionesDisneyPlusAPIID"] = ObjetosVentana.tbOpcionesDisneyPlusAPIID.Text;
+            }
+            else
+            {
+                ObjetosVentana.tbOpcionesDisneyPlusAPIID.Text = datos.Values["OpcionesDisneyPlusAPIID"].ToString();
+            }
+
+            ObjetosVentana.tbOpcionesDisneyPlusAPIID.TextChanged += DetectarAPIID;
+
+            if (datos.Values["OpcionesDisneyPlusSearchID"] == null)
+            {
+                ObjetosVentana.tbOpcionesDisneyPlusSearchID.Text = "4131afa3b274f44e2";
+                datos.Values["OpcionesDisneyPlusSearchID"] = ObjetosVentana.tbOpcionesDisneyPlusSearchID.Text;
+            }
+            else
+            {
+                ObjetosVentana.tbOpcionesDisneyPlusSearchID.Text = datos.Values["OpcionesDisneyPlusSearchID"].ToString();
+            }
+
+            ObjetosVentana.tbOpcionesDisneyPlusSearchID.TextChanged += DetectarSearchID;
+
+            ObjetosVentana.botonOpcionesDisneyPlusAPIAyuda.Click += AbrirAyudaClick;
+            ObjetosVentana.botonOpcionesDisneyPlusAPIAyuda.PointerEntered += Animaciones.EntraRatonBoton2;
+            ObjetosVentana.botonOpcionesDisneyPlusAPIAyuda.PointerExited += Animaciones.SaleRatonBoton2;
+        }
+
+        private static async void AbrirAyudaClick(object sender, RoutedEventArgs e)
+        {
+            ResourceLoader recursos = new ResourceLoader();
+
+            TabView tb = new TabView
+            {
+                IsAddTabButtonVisible = false
+            };
+
+            ImageEx imagen1 = new ImageEx
+            {
+                Source = "Assets\\Ayuda\\google1.png",
+                IsCacheEnabled = true,
+                EnableLazyLoading = true,
+                CornerRadius = new CornerRadius(5)
+            };
+
+            TabViewItem item1 = new TabViewItem
+            {
+                Header = recursos.GetString("APIID"),
+                Content = imagen1,
+                IsClosable = false
+            };
+
+            tb.TabItems.Add(item1);
+
+            ImageEx imagen2 = new ImageEx
+            {
+                Source = "Assets\\Ayuda\\google2.png",
+                IsCacheEnabled = true,
+                EnableLazyLoading = true,
+                CornerRadius = new CornerRadius(5)
+            };
+
+            TabViewItem item2 = new TabViewItem
+            {
+                Header = recursos.GetString("SearchID"),
+                Content = imagen2,
+                IsClosable = false
+            };
+
+            tb.TabItems.Add(item2);
+
+            ContentDialog ventana = new ContentDialog
+            {
+                RequestedTheme = ElementTheme.Dark,
+                PrimaryButtonText = recursos.GetString("APIIDOpen"),
+                SecondaryButtonText = recursos.GetString("SearchIDOpen"),
+                CloseButtonText = recursos.GetString("Close"),
+                Content = tb,
+                XamlRoot = ObjetosVentana.ventana.Content.XamlRoot
+            };
+
+            ventana.PrimaryButtonClick += AbrirEnlace1;
+            ventana.SecondaryButtonClick += AbrirEnlace2;
+
+            await ventana.ShowAsync();
+        }
+
+        private static async void AbrirEnlace1(ContentDialog ventana, ContentDialogButtonClickEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://developers.google.com/custom-search/v1/introduction?hl=es-419"));
+        }
+
+        private static async void AbrirEnlace2(ContentDialog ventana, ContentDialogButtonClickEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://programmablesearchengine.google.com/controlpanel/all"));
+        }
+
+        private static void DetectarAPIID(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Trim().Length > 0)
+            {
+                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+                datos.Values["OpcionesDisneyPlusAPIID"] = tb.Text;
+            }
+        }
+
+        private static void DetectarSearchID(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Trim().Length > 0)
+            {
+                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+                datos.Values["OpcionesDisneyPlusSearchID"] = tb.Text;
+            }
         }
 
         private static void BuscarClick(object sender, RoutedEventArgs e)
@@ -49,10 +173,11 @@ namespace Plataformas
                 ActivarDesactivar(false);
                 ObjetosVentana.prDisneyPlusResultados.Visibility = Visibility.Visible;
 
+                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
                 ObjetosVentana.gvDisneyPlusResultados.Items.Clear();
 
                 await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbDisneyPlusBuscar.Text.Trim(), "4131afa3b274f44e2", "disney");
+                List<string> resultados = Google.Buscar(ObjetosVentana.tbDisneyPlusBuscar.Text.Trim(), datos.Values["OpcionesDisneyPlusAPIID"].ToString(), datos.Values["OpcionesDisneyPlusSearchID"].ToString(), "disney");
                 List<string> repetidos = new List<string>();
 
                 if (resultados.Count > 0)

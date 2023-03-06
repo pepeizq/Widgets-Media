@@ -3,6 +3,7 @@ using Interfaz;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.Windows.ApplicationModel.Resources;
 using SpotifyAPI.Web;
@@ -25,6 +26,8 @@ namespace Plataformas
             ObjetosVentana.botonSpotifyBuscar.Click += BuscarClick;
             ObjetosVentana.botonSpotifyBuscar.PointerEntered += Animaciones.EntraRatonBoton2; 
             ObjetosVentana.botonSpotifyBuscar.PointerExited += Animaciones.SaleRatonBoton2;
+
+            ObjetosVentana.tbSpotifyBuscar.KeyDown += BuscarPulsar;
 
             ObjetosVentana.cbOpcionesSpotifyModo.SelectionChanged += CambiarModoEjecucion;
             ObjetosVentana.cbOpcionesSpotifyModo.PointerEntered += Animaciones.EntraRatonComboCaja2;
@@ -187,7 +190,20 @@ namespace Plataformas
             return null;
         }
 
-        private static async void BuscarClick(object sender, RoutedEventArgs e)
+        private static void BuscarClick(object sender, RoutedEventArgs e)
+        {
+            Buscar();
+        }
+
+        private static void BuscarPulsar(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                Buscar();
+            }
+        }
+
+        private static async void Buscar()
         {
             if (ObjetosVentana.tbSpotifyBuscar.Text.Trim().Length > 3)
             {

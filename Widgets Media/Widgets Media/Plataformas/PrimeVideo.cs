@@ -4,11 +4,13 @@ using Interfaz;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI;
 using static Widgets_Media.MainWindow;
 
@@ -21,6 +23,8 @@ namespace Plataformas
             ObjetosVentana.botonPrimeVideoBuscar.Click += BuscarClick;
             ObjetosVentana.botonPrimeVideoBuscar.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonPrimeVideoBuscar.PointerExited += Animaciones.SaleRatonBoton2;
+
+            ObjetosVentana.tbPrimeVideoBuscar.KeyDown += BuscarPulsar;
 
             ObjetosVentana.cbOpcionesPrimeVideoModo.SelectionChanged += CambiarModoEjecucion;
             ObjetosVentana.cbOpcionesPrimeVideoModo.PointerEntered += Animaciones.EntraRatonComboCaja2;
@@ -44,7 +48,20 @@ namespace Plataformas
             datos.Values["OpcionesPrimeVideoModo"] = ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex;
         }
 
-        private static async void BuscarClick(object sender, RoutedEventArgs e)
+        private static void BuscarClick(object sender, RoutedEventArgs e)
+        {
+            Buscar();
+        }
+
+        private static void BuscarPulsar(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                Buscar();
+            }
+        }
+
+        private static async void Buscar()
         {
             if (ObjetosVentana.tbPrimeVideoBuscar.Text.Trim().Length > 3)
             {
@@ -117,8 +134,11 @@ namespace Plataformas
                                 EnableLazyLoading = true,
                                 Stretch = Stretch.UniformToFill,
                                 Source = streaming.imagenMedianayGrande,
-                                CornerRadius = new CornerRadius(2)
+                                CornerRadius = new CornerRadius(2),
+                                Tag = streaming
                             };
+
+                            imagen.ImageExFailed += ImagenFalla;
 
                             Button2 botonItem = new Button2
                             {
@@ -140,7 +160,7 @@ namespace Plataformas
                             {
                                 Text = streaming.nombre
                             };
-
+              
                             ToolTipService.SetToolTip(botonItem, tbTt);
                             ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
 
@@ -158,6 +178,28 @@ namespace Plataformas
                 ActivarDesactivar(true);
                 ObjetosVentana.prPrimeVideoResultados.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private static void ImagenFalla(object sender, ImageExFailedEventArgs e)
+        {
+            ImageEx imagen = (ImageEx)sender;
+            PrimeVideoClase streamingImagen = imagen.Tag as PrimeVideoClase;
+
+            int i = 0;
+            foreach (GridViewItem item in ObjetosVentana.gvPrimeVideoResultados.Items)
+            {
+                Button2 boton = item.Content as Button2;
+                PrimeVideoClase streamingBoton = boton.Tag as PrimeVideoClase;
+
+                if (streamingBoton.imagenMedianayGrande == streamingImagen.imagenMedianayGrande)
+                {
+                    break;
+                }
+
+                i += 1;
+            }
+
+            ObjetosVentana.gvPrimeVideoResultados.Items.RemoveAt(i);
         }
 
         private static void ImagenItemClick(object sender, RoutedEventArgs e)

@@ -12,10 +12,8 @@ namespace Plataformas
     {
         //https://programmablesearchengine.google.com/controlpanel/all
 
-        public static List<string> Buscar(string cosaBuscar, string motorBusquedaID, string plataforma)
+        public static List<string> Buscar(string cosaBuscar, string apiClave, string motorBusquedaID, string plataforma)
         {
-            string apiClave = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
-
             CustomSearchAPIService servicio = new CustomSearchAPIService(new BaseClientService.Initializer { ApiKey = apiClave });
             CseResource.ListRequest peticion = servicio.Cse.List();
             peticion.Cx = motorBusquedaID;
@@ -53,9 +51,9 @@ namespace Plataformas
                     }
                     else if (plataforma == "disney")
                     {
-                        ObjetosVentana.ttDisneyErrorBuscar.Title = recursos.GetString("DisneyPlusError");
-                        ObjetosVentana.ttDisneyErrorBuscar.Subtitle = recursos.GetString("SearchError");
-                        ObjetosVentana.ttDisneyErrorBuscar.IsOpen = true;
+                        ObjetosVentana.ttDisneyPlusErrorBuscar.Title = recursos.GetString("DisneyPlusError");
+                        ObjetosVentana.ttDisneyPlusErrorBuscar.Subtitle = recursos.GetString("SearchError");
+                        ObjetosVentana.ttDisneyPlusErrorBuscar.IsOpen = true;
                     }
 
                     break;

@@ -83,7 +83,10 @@ namespace Widgets_Media
             ObjetosVentana.svDisneyPlusResultados = svDisneyPlusResultados;
             ObjetosVentana.prDisneyPlusResultados = prDisneyPlusResultados;
             ObjetosVentana.gvDisneyPlusResultados = gvDisneyPlusResultados;
-            ObjetosVentana.ttDisneyErrorBuscar = ttDisneyErrorBuscar;
+            ObjetosVentana.ttDisneyPlusErrorBuscar = ttDisneyPlusErrorBuscar;
+            ObjetosVentana.botonOpcionesDisneyPlusAPIAyuda = botonOpcionesDisneyPlusAPIAyuda;
+            ObjetosVentana.tbOpcionesDisneyPlusAPIID = tbOpcionesDisneyPlusAPIID;
+            ObjetosVentana.tbOpcionesDisneyPlusSearchID = tbOpcionesDisneyPlusSearchID;
 
             //-------------------------------------------------------------------
 
@@ -125,6 +128,7 @@ namespace Widgets_Media
             ObjetosVentana.cbWidgetPrecargaImagenOrientacionVertical = cbWidgetPrecargaImagenOrientacionVertical;
             ObjetosVentana.botonWidgetPrecargaCargarStreaming = botonWidgetPrecargaCargarStreaming;
             ObjetosVentana.tbWidgetCargarStreamingMensaje = tbWidgetCargarStreamingMensaje;
+            ObjetosVentana.botonWidgetPrecargaAbrirAyuda = botonWidgetPrecargaAbrirAyuda;
 
             //-------------------------------------------------------------------
 
@@ -183,7 +187,10 @@ namespace Widgets_Media
             public static ScrollViewer svDisneyPlusResultados { get; set; }
             public static ProgressRing prDisneyPlusResultados { get; set; }
             public static AdaptiveGridView gvDisneyPlusResultados { get; set; }
-            public static TeachingTip ttDisneyErrorBuscar { get; set; }
+            public static TeachingTip ttDisneyPlusErrorBuscar { get; set; }
+            public static Button botonOpcionesDisneyPlusAPIAyuda { get; set; }
+            public static TextBox tbOpcionesDisneyPlusAPIID { get; set; }
+            public static TextBox tbOpcionesDisneyPlusSearchID { get; set; }
 
             //-------------------------------------------------------------------
 
@@ -225,6 +232,7 @@ namespace Widgets_Media
             public static ComboBox cbWidgetPrecargaImagenOrientacionVertical { get; set; }
             public static Button botonWidgetPrecargaCargarStreaming { get; set; }
             public static TextBlock tbWidgetCargarStreamingMensaje { get; set; }
+            public static Button botonWidgetPrecargaAbrirAyuda { get; set; }
 
             //-------------------------------------------------------------------
 

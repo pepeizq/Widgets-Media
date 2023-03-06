@@ -120,6 +120,12 @@
   <data name="AnyMedia" xml:space="preserve">
     <value>Cualquier Streaming</value>
   </data>
+  <data name="APIID" xml:space="preserve">
+    <value>API Clave</value>
+  </data>
+  <data name="APIIDOpen" xml:space="preserve">
+    <value>Abrir API Clave</value>
+  </data>
   <data name="Bottom.Text" xml:space="preserve">
     <value>Abajo</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="DisneyPlusError" xml:space="preserve">
     <value>Error buscando en Disney+</value>
+  </data>
+  <data name="DisneyPlusOptionsSearchAPI.Text" xml:space="preserve">
+    <value>La aplicación usa la API de Google para buscar películas y series de Disney+, dadas las limitaciones de esta API es fácil alcanzar el límite diario y por esa razón te doy la opción de usar la API con tu cuenta de Google</value>
   </data>
   <data name="Executable.Text" xml:space="preserve">
     <value>Ejecutable</value>
@@ -184,7 +193,7 @@
     <value>Error buscando en Netflix</value>
   </data>
   <data name="NetflixOptionsSearchAPI.Text" xml:space="preserve">
-    <value>La aplicación usa la API de Google para buscar películas y series de Netflix, dadas las limitaciones de esta API es fácil alcanzar el límite diario y por esa razón te damos la opción de usar la API con vuestra cuenta de Google</value>
+    <value>La aplicación usa la API de Google para buscar películas y series de Netflix, dadas las limitaciones de esta API es fácil alcanzar el límite diario y por esa razón te doy la opción de usar la API con tu cuenta de Google</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Opciones</value>
@@ -243,6 +252,12 @@
   <data name="SearchError" xml:space="preserve">
     <value>Ha habido demasiadas búsquedas en la API de Google que usa esta app, pero se puede cambiar desde Opciones</value>
   </data>
+  <data name="SearchID" xml:space="preserve">
+    <value>Buscador Clave</value>
+  </data>
+  <data name="SearchIDOpen" xml:space="preserve">
+    <value>Abrir Buscador Clave</value>
+  </data>
   <data name="SpotifyAlbums.Text" xml:space="preserve">
     <value>Álbumes</value>
   </data>
@@ -276,6 +291,12 @@
   <data name="TrialMessage.Text" xml:space="preserve">
     <value>Estás usando una version trial de la aplicación, solo podrás añadir 1 widget.</value>
   </data>
+  <data name="WidgetHelp.Text" xml:space="preserve">
+    <value>Ayuda</value>
+  </data>
+  <data name="WidgetHelp2.Text" xml:space="preserve">
+    <value>Si tienes dudas en como se añade el widget en la app, puedes consultar una guía en mi web</value>
+  </data>
   <data name="WidgetImageOrientationHorizontal.Text" xml:space="preserve">
     <value>Orientación horizontal de la imagen</value>
   </data>
@@ -287,5 +308,8 @@
   </data>
   <data name="WidgetLoadStreamingMessage" xml:space="preserve">
     <value>Cargado widget del streaming, abre la app Widgets y añade el widget del streaming desde 'Añadir Widgets'.</value>
+  </data>
+  <data name="WidgetOpenHelp.Text" xml:space="preserve">
+    <value>Abrir Guía</value>
   </data>
 </root>

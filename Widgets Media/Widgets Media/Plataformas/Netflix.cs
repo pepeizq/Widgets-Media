@@ -4,11 +4,15 @@ using Interfaz;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.Windows.ApplicationModel.Resources;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.System;
 using Windows.UI;
 using static Widgets_Media.MainWindow;
 
@@ -21,6 +25,8 @@ namespace Plataformas
             ObjetosVentana.botonNetflixBuscar.Click += BuscarClick;
             ObjetosVentana.botonNetflixBuscar.PointerEntered += Animaciones.EntraRatonBoton2;
             ObjetosVentana.botonNetflixBuscar.PointerExited += Animaciones.SaleRatonBoton2;
+
+            ObjetosVentana.tbNetflixBuscar.KeyDown += BuscarPulsar;
 
             ObjetosVentana.cbOpcionesNetflixModo.SelectionChanged += CambiarModoEjecucion;
             ObjetosVentana.cbOpcionesNetflixModo.PointerEntered += Animaciones.EntraRatonComboCaja2;
@@ -36,6 +42,34 @@ namespace Plataformas
             {
                 ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = (int)datos.Values["OpcionesNetflixModo"];
             }
+
+            if (datos.Values["OpcionesNetflixAPIID"] == null)
+            {
+                ObjetosVentana.tbOpcionesNetflixAPIID.Text = "AIzaSyC2mAim7jYXCR8ePfx59BdwU8zCTTNaURs";
+                datos.Values["OpcionesNetflixAPIID"] = ObjetosVentana.tbOpcionesNetflixAPIID.Text;
+            }
+            else
+            {
+                ObjetosVentana.tbOpcionesNetflixAPIID.Text = datos.Values["OpcionesNetflixAPIID"].ToString();
+            }
+
+            ObjetosVentana.tbOpcionesNetflixAPIID.TextChanged += DetectarAPIID;
+
+            if (datos.Values["OpcionesNetflixSearchID"] == null)
+            {
+                ObjetosVentana.tbOpcionesNetflixSearchID.Text = "e6760ff33b21c479a";
+                datos.Values["OpcionesNetflixSearchID"] = ObjetosVentana.tbOpcionesNetflixSearchID.Text;
+            }
+            else
+            {
+                ObjetosVentana.tbOpcionesNetflixSearchID.Text = datos.Values["OpcionesNetflixSearchID"].ToString();
+            }
+
+            ObjetosVentana.tbOpcionesNetflixSearchID.TextChanged += DetectarSearchID;
+
+            ObjetosVentana.botonOpcionesNetflixAPIAyuda.Click += AbrirAyudaClick;
+            ObjetosVentana.botonOpcionesNetflixAPIAyuda.PointerEntered += Animaciones.EntraRatonBoton2;
+            ObjetosVentana.botonOpcionesNetflixAPIAyuda.PointerExited += Animaciones.SaleRatonBoton2;
         }
 
         private static void CambiarModoEjecucion(object sender, SelectionChangedEventArgs e)
@@ -44,7 +78,111 @@ namespace Plataformas
             datos.Values["OpcionesNetflixModo"] = ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex;
         }
 
-        private static async void BuscarClick(object sender, RoutedEventArgs e)
+        private static async void AbrirAyudaClick(object sender, RoutedEventArgs e)
+        {
+            ResourceLoader recursos = new ResourceLoader();
+
+            TabView tb = new TabView
+            {
+                IsAddTabButtonVisible = false
+            };
+
+            ImageEx imagen1 = new ImageEx
+            {
+                Source = "Assets\\Ayuda\\google1.png",
+                IsCacheEnabled = true,
+                EnableLazyLoading = true,
+                CornerRadius = new CornerRadius(5)
+            };
+
+            TabViewItem item1 = new TabViewItem
+            {
+                Header = recursos.GetString("APIID"),
+                Content = imagen1,
+                IsClosable = false
+            };
+
+            tb.TabItems.Add(item1);
+
+            ImageEx imagen2 = new ImageEx
+            {
+                Source = "Assets\\Ayuda\\google2.png",
+                IsCacheEnabled = true,
+                EnableLazyLoading = true,
+                CornerRadius = new CornerRadius(5)
+            };
+
+            TabViewItem item2 = new TabViewItem
+            {
+                Header = recursos.GetString("SearchID"),
+                Content = imagen2,
+                IsClosable = false
+            };
+
+            tb.TabItems.Add(item2);
+
+            ContentDialog ventana = new ContentDialog
+            {
+                RequestedTheme = ElementTheme.Dark,
+                PrimaryButtonText = recursos.GetString("APIIDOpen"),
+                SecondaryButtonText = recursos.GetString("SearchIDOpen"),
+                CloseButtonText = recursos.GetString("Close"),
+                Content = tb,
+                XamlRoot = ObjetosVentana.ventana.Content.XamlRoot
+            };
+
+            ventana.PrimaryButtonClick += AbrirEnlace1;
+            ventana.SecondaryButtonClick += AbrirEnlace2;
+
+            await ventana.ShowAsync();
+        }
+
+        private static async void AbrirEnlace1(ContentDialog ventana, ContentDialogButtonClickEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://developers.google.com/custom-search/v1/introduction?hl=es-419"));
+        }
+
+        private static async void AbrirEnlace2(ContentDialog ventana, ContentDialogButtonClickEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("https://programmablesearchengine.google.com/controlpanel/all"));
+        }
+
+        private static void DetectarAPIID(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Trim().Length > 0)
+            {
+                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+                datos.Values["OpcionesNetflixAPIID"] = tb.Text;
+            }
+        }
+
+        private static void DetectarSearchID(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+
+            if (tb.Text.Trim().Length > 0)
+            {
+                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+                datos.Values["OpcionesNetflixSearchID"] = tb.Text;
+            }
+        }
+
+        private static void BuscarClick(object sender, RoutedEventArgs e)
+        {
+            Buscar();
+        }
+
+        private static void BuscarPulsar(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                Buscar();
+            }
+        }
+
+        private async static void Buscar()
         {
             if (ObjetosVentana.tbNetflixBuscar.Text.Trim().Length > 3)
             {
@@ -55,7 +193,7 @@ namespace Plataformas
                 ObjetosVentana.gvNetflixResultados.Items.Clear();
 
                 await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), "e6760ff33b21c479a", "netflix");
+                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), datos.Values["OpcionesNetflixAPIID"].ToString(), datos.Values["OpcionesNetflixSearchID"].ToString(), "netflix");
 
                 if (resultados.Count > 0)
                 {
@@ -70,13 +208,13 @@ namespace Plataformas
 
                             string htmlAPI = await Decompiladores.CogerHtml("https://unogs.com/api/title/detail?netflixid=" + id);
 
-                            if (htmlAPI != null) 
+                            if (htmlAPI != null)
                             {
                                 List<NetflixAPIDatos> json = JsonConvert.DeserializeObject<List<NetflixAPIDatos>>(htmlAPI);
 
                                 if (json != null)
                                 {
-                                    if (json.Count > 0) 
+                                    if (json.Count > 0)
                                     {
                                         streaming.nombre = json[0].titulo;
 
@@ -99,7 +237,7 @@ namespace Plataformas
                                                 {
                                                     streaming.enlace = "netflix:/app?playVideoId=" + id;
                                                 }
- 
+
                                                 ImageEx imagen = new ImageEx
                                                 {
                                                     IsCacheEnabled = true,
@@ -143,7 +281,7 @@ namespace Plataformas
                                             }
                                         }
                                     }
-                                }                                
+                                }
                             }
                         }
                     }
