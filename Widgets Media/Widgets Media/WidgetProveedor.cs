@@ -7,9 +7,4 @@ public class WidgetProveedor : WidgetProveedorBase
     {
         RegistrarWidget<WidgetMedia>("Media");
     }
-
-    public void Test()
-    {
-        RegistrarWidget<WidgetMedia>("Media");
-    }
 }

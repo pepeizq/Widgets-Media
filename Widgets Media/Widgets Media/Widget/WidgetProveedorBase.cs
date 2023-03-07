@@ -42,14 +42,16 @@ public class WidgetProveedorBase : IWidgetProvider
 
     public IWidget InitializeWidgetInternal(WidgetContext contexto, string estado)
     {
-        var widgetName = contexto.DefinitionId;
-        var widgetId = contexto.Id;
-        if (_widgetRegistro.TryGetValue(widgetName, out var creation))
+        string widgetNombre = contexto.DefinitionId;
+        string widgetId = contexto.Id;
+
+        if (_widgetRegistro.TryGetValue(widgetNombre, out var creation))
         {
-            var widgetImpl = creation.Factory(contexto, estado);
+            IWidget widgetImpl = creation.Factory(contexto, estado);
             _widgetsFuncionando[widgetId] = widgetImpl;
             return widgetImpl;
         }
+
         return default;
     }
 
