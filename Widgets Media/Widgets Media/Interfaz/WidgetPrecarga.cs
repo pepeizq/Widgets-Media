@@ -195,20 +195,20 @@ namespace Interfaz
 
             //-----------------------------------------------------
 
-            if (ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled == true)
-            {
-                if (await Trial.Detectar() == true)
-                {
-                    if (await Ficheros.LeerCantidadFicheros() < 1)
-                    {
-                        ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = true;
-                    }
-                    else
-                    {
-                        ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = false;
-                    }
-                }
-            }
+            //if (ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled == true)
+            //{
+            //    if (await Trial.Detectar() == true)
+            //    {
+            //        if (await Ficheros.LeerCantidadFicheros() < 1)
+            //        {
+            //            ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = true;
+            //        }
+            //        else
+            //        {
+            //            ObjetosVentana.botonWidgetPrecargaCargarStreaming.IsEnabled = false;
+            //        }
+            //    }
+            //}
         }
 
         private static void CambiarImagenElegida(object sender, SelectionChangedEventArgs e)

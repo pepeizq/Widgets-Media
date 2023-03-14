@@ -126,6 +126,24 @@
   <data name="APIIDOpen" xml:space="preserve">
     <value>Open API Key</value>
   </data>
+  <data name="AppClosingMessage1" xml:space="preserve">
+    <value>This application is open source and you can check it on Github, and if you have an account there I would appreciate a star</value>
+  </data>
+  <data name="AppClosingMessage2" xml:space="preserve">
+    <value>You can rate the app in the Microsoft Store, I'm not going to tell you how you should rate me but I hope you keep in mind that I'm the only developer with the app</value>
+  </data>
+  <data name="AppClosingMessage3" xml:space="preserve">
+    <value>You can check the latest updates that I have released for this application on my website, do not expect kilometric updates because only two hands work on this application</value>
+  </data>
+  <data name="AppClosingNo.Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="AppClosingQuestion.Text" xml:space="preserve">
+    <value>Do you want to close the application?</value>
+  </data>
+  <data name="AppClosingYes.Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="Bottom.Text" xml:space="preserve">
     <value>Bottom</value>
   </data>
@@ -194,6 +212,9 @@
   </data>
   <data name="NetflixOptionsSearchAPI.Text" xml:space="preserve">
     <value>The application uses the Google API to search for Netflix movies and series, given the limitations of this API it is easy to reach the daily limit and for that reason i give you the option to use the API with your Google account</value>
+  </data>
+  <data name="Open.Text" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
