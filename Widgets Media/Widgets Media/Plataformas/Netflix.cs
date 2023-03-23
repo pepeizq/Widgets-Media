@@ -34,13 +34,20 @@ namespace Plataformas
 
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
            
-            if ((int)datos.Values["OpcionesNetflixModo"] == -1)
+            if (datos.Values["OpcionesNetflixModo"] != null)
             {
-                ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = 0;
+                if ((int)datos.Values["OpcionesNetflixModo"] == -1)
+                {
+                    ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = 0;
+                }
+                else
+                {
+                    ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = (int)datos.Values["OpcionesNetflixModo"];
+                }
             }
             else
             {
-                ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = (int)datos.Values["OpcionesNetflixModo"];
+                ObjetosVentana.cbOpcionesNetflixModo.SelectedIndex = 0;
             }
 
             if (datos.Values["OpcionesNetflixAPIID"] == null)

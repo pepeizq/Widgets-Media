@@ -32,13 +32,20 @@ namespace Plataformas
 
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
      
-            if ((int)datos.Values["OpcionesPrimeVideoModo"] == -1)
+            if (datos.Values["OpcionesPrimeVideoModo"] != null)
             {
-                ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex = 0;
+                if ((int)datos.Values["OpcionesPrimeVideoModo"] == -1)
+                {
+                    ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex = 0;
+                }
+                else
+                {
+                    ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex = (int)datos.Values["OpcionesPrimeVideoModo"];
+                }
             }
             else
             {
-                ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex = (int)datos.Values["OpcionesPrimeVideoModo"];
+                ObjetosVentana.cbOpcionesPrimeVideoModo.SelectedIndex = 0;
             }
         }
 

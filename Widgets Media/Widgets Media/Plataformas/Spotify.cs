@@ -35,13 +35,20 @@ namespace Plataformas
 
             ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
 
-            if ((int)datos.Values["OpcionesSpotifyModo"] == -1)
+            if (datos.Values["OpcionesSpotifyModo"] != null)
             {
-                ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = 0;
+                if ((int)datos.Values["OpcionesSpotifyModo"] == -1)
+                {
+                    ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = 0;
+                }
+                else
+                {
+                    ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = (int)datos.Values["OpcionesSpotifyModo"];
+                }
             }
             else
             {
-                ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = (int)datos.Values["OpcionesSpotifyModo"];
+                ObjetosVentana.cbOpcionesSpotifyModo.SelectedIndex = 0;
             }
 
             ObjetosVentana.botonOpcionesSpotifyAbrirAyuda.Click += AbrirAyudaClick;
