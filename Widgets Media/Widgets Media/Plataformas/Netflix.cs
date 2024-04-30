@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
+using Microsoft.VisualBasic;
 using Microsoft.Windows.ApplicationModel.Resources;
 using Newtonsoft.Json;
 using System;
@@ -189,117 +190,126 @@ namespace Plataformas
             }
         }
 
-        private async static void Buscar()
-        {
-            if (ObjetosVentana.tbNetflixBuscar.Text.Trim().Length > 3)
-            {
-                ActivarDesactivar(false);
-                ObjetosVentana.prNetflixResultados.Visibility = Visibility.Visible;
+		private async static void Buscar()
+		{
+			if (ObjetosVentana.tbNetflixBuscar.Text.Trim().Length > 3)
+			{
+				ActivarDesactivar(false);
+				ObjetosVentana.prNetflixResultados.Visibility = Visibility.Visible;
 
-                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
-                ObjetosVentana.gvNetflixResultados.Items.Clear();
+				ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+				ObjetosVentana.gvNetflixResultados.Items.Clear();
 
-                await Task.Delay(100);
-                List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), datos.Values["OpcionesNetflixAPIID"].ToString(), datos.Values["OpcionesNetflixSearchID"].ToString(), "netflix");
+				await Task.Delay(100);
+				List<string> resultados = Google.Buscar(ObjetosVentana.tbNetflixBuscar.Text.Trim(), datos.Values["OpcionesNetflixAPIID"].ToString(), datos.Values["OpcionesNetflixSearchID"].ToString(), "netflix");
 
-                if (resultados.Count > 0)
-                {
-                    foreach (string resultado in resultados)
-                    {
-                        if (resultado.Contains("netflix.com/title/") == true)
-                        {
-                            NetflixClase streaming = new NetflixClase();
+				if (resultados.Count > 0)
+				{
+					foreach (string resultado in resultados)
+					{
+						if (resultado.Contains("netflix.com/title/") == true)
+						{
+							string html = await Decompiladores.CogerHtml(resultado);
 
-                            string id = resultado;
-                            id = id.Replace("https://www.netflix.com/title/", null);
+							if (string.IsNullOrEmpty(html) == false)
+							{
+								string id = resultado;
+								id = id.Replace("https://www.netflix.com/title/", null);
 
-                            string htmlAPI = await Decompiladores.CogerHtml("https://unogs.com/api/title/detail?netflixid=" + id);
+								NetflixClase streaming = new NetflixClase();
 
-                            if (htmlAPI != null)
-                            {
-                                List<NetflixAPIDatos> json = JsonConvert.DeserializeObject<List<NetflixAPIDatos>>(htmlAPI);
+								int int1 = html.IndexOf("<title>");
+								string temp1 = html.Remove(0, int1 + 7);
 
-                                if (json != null)
-                                {
-                                    if (json.Count > 0)
-                                    {
-                                        streaming.nombre = json[0].titulo;
+								int int2 = temp1.IndexOf("</title>");
+								string temp2 = temp1.Remove(int2, temp1.Length - int2);
 
-                                        string htmlAPI2 = await Decompiladores.CogerHtml("https://unogs.com/api/title/bgimages?netflixid=" + id);
+								if (temp2.Contains("Watch") == true)
+								{
+									int int0 = temp2.IndexOf("Watch");
 
-                                        NetflixAPIImagenes json2 = JsonConvert.DeserializeObject<NetflixAPIImagenes>(htmlAPI2);
+									if (int0 == 0)
+									{
+										temp2 = temp2.Remove(0, int0 + 6);
+									}
+								}
 
-                                        if (json2 != null)
-                                        {
-                                            if (json2.imagenesAnchas != null && json2.imagenesVerticales != null)
-                                            {
-                                                streaming.imagenPequeña = json2.imagenesAnchas[0].enlace;
-                                                streaming.imagenMedianayGrande = json2.imagenesVerticales[0].enlace;
+								temp2 = temp2.Replace("| Netflix Official Site", null);
 
-                                                if ((int)datos.Values["OpcionesNetflixModo"] == 0)
-                                                {
-                                                    streaming.enlace = resultado;
-                                                }
-                                                else if ((int)datos.Values["OpcionesNetflixModo"] == 1)
-                                                {
-                                                    streaming.enlace = "netflix:/app?playVideoId=" + id;
-                                                }
+								streaming.nombre = temp2.Trim();
 
-                                                ImageEx imagen = new ImageEx
-                                                {
-                                                    IsCacheEnabled = true,
-                                                    EnableLazyLoading = true,
-                                                    Stretch = Stretch.UniformToFill,
-                                                    Source = streaming.imagenMedianayGrande,
-                                                    CornerRadius = new CornerRadius(2)
-                                                };
+								int int3 = html.IndexOf("<source");
+								string temp3 = html.Remove(0, int3);
 
-                                                Button2 botonItem = new Button2
-                                                {
-                                                    Content = imagen,
-                                                    Margin = new Thickness(0),
-                                                    Padding = new Thickness(0),
-                                                    BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
-                                                    BorderThickness = new Thickness(2),
-                                                    Tag = streaming,
-                                                    MaxWidth = 250,
-                                                    CornerRadius = new CornerRadius(5)
-                                                };
+								int int4 = temp3.IndexOf("srcSet=");
+								string temp4 = temp3.Remove(0, int4 + 8);
 
-                                                botonItem.Click += ImagenItemClick;
-                                                botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
-                                                botonItem.PointerExited += Animaciones.SaleRatonBoton2;
+								int int5 = temp4.IndexOf(Strings.ChrW(34));
+								string temp5 = temp4.Remove(int5, temp4.Length - int5);
 
-                                                TextBlock tbTt = new TextBlock
-                                                {
-                                                    Text = streaming.nombre
-                                                };
+								streaming.imagenPequeña = temp5.Trim();
+								streaming.imagenMedianayGrande = temp5.Trim();
 
-                                                ToolTipService.SetToolTip(botonItem, tbTt);
-                                                ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
+								if ((int)datos.Values["OpcionesNetflixModo"] == 0)
+								{
+									streaming.enlace = resultado;
+								}
+								else if ((int)datos.Values["OpcionesNetflixModo"] == 1)
+								{
+									streaming.enlace = "netflix:/app?playVideoId=" + id;
+								}
 
-                                                GridViewItem item = new GridViewItem
-                                                {
-                                                    Content = botonItem,
-                                                    Margin = new Thickness(5, 0, 5, 10)
-                                                };
+								ImageEx imagen = new ImageEx
+								{
+									IsCacheEnabled = true,
+									EnableLazyLoading = true,
+									Stretch = Stretch.UniformToFill,
+									Source = streaming.imagenMedianayGrande,
+									CornerRadius = new CornerRadius(2)
+								};
 
-                                                ObjetosVentana.gvNetflixResultados.Items.Add(item);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+								Button2 botonItem = new Button2
+								{
+									Content = imagen,
+									Margin = new Thickness(0),
+									Padding = new Thickness(0),
+									BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
+									BorderThickness = new Thickness(2),
+									Tag = streaming,
+									MaxWidth = 250,
+									CornerRadius = new CornerRadius(5)
+								};
 
-                ActivarDesactivar(true);
-                ObjetosVentana.prNetflixResultados.Visibility = Visibility.Collapsed;
-            }
-        }
+								botonItem.Click += ImagenItemClick;
+								botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
+								botonItem.PointerExited += Animaciones.SaleRatonBoton2;
 
-        private static void ImagenItemClick(object sender, RoutedEventArgs e)
+								TextBlock tbTt = new TextBlock
+								{
+									Text = streaming.nombre
+								};
+
+								ToolTipService.SetToolTip(botonItem, tbTt);
+								ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
+
+								GridViewItem item = new GridViewItem
+								{
+									Content = botonItem,
+									Margin = new Thickness(5, 0, 5, 10)
+								};
+
+								ObjetosVentana.gvNetflixResultados.Items.Add(item);
+							}
+						}
+					}
+				}
+
+				ActivarDesactivar(true);
+				ObjetosVentana.prNetflixResultados.Visibility = Visibility.Collapsed;
+			}
+		}
+
+		private static void ImagenItemClick(object sender, RoutedEventArgs e)
         {
             Button boton = sender as Button;
             NetflixClase streaming = boton.Tag as NetflixClase;

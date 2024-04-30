@@ -11,7 +11,7 @@
   <Identity
     Name="12041pepeizq.pepeizqsWidgetsforStreaming"
     Publisher="CN=E6A59F16-60E0-4B88-A8A1-993C16A63CD0"
-    Version="1.0.6.0" />
+    Version="1.0.7.0" />
 
   <Properties>
     <DisplayName>pepeizq&apos;s Widgets for Streaming</DisplayName>

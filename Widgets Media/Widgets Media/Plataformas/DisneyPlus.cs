@@ -190,127 +190,127 @@ namespace Plataformas
 
                             if (html != null)
                             {
-                                if (html.Contains("<title>") == true)
-                                {
-                                    DisneyPlusClase streaming = new DisneyPlusClase();
+								if (html.Contains("<title>") == true)
+								{
+									DisneyPlusClase streaming = new DisneyPlusClase();
 
-                                    int int1 = html.IndexOf("<title>");
-                                    string temp1 = html.Remove(0, int1 + 7);
+									int int1 = html.IndexOf("<title>");
+									string temp1 = html.Remove(0, int1 + 7);
 
-                                    int int2 = temp1.IndexOf("</title>");
-                                    string temp2 = temp1.Remove(int2, temp1.Length - int2);
+									int int2 = temp1.IndexOf("</title>");
+									string temp2 = temp1.Remove(int2, temp1.Length - int2);
 
-                                    temp2 = temp2.Replace(" | Disney+", null);
-                                    temp2 = temp2.Replace("Watch", null);
+									temp2 = temp2.Replace(" | Disney+", null);
+									temp2 = temp2.Replace("Watch", null);
 
-                                    streaming.nombre = temp2.Trim();
+									streaming.nombre = temp2.Trim();
 
-                                    bool añadir = true;
+									bool añadir = true;
 
-                                    if (streaming.nombre == "All Series and TV Shows")
-                                    {
-                                        añadir = false;
-                                    }
-                                    else if (streaming.nombre == "All Movies")
-                                    {
-                                        añadir = false;
-                                    }
+									if (streaming.nombre == "All Series and TV Shows")
+									{
+										añadir = false;
+									}
+									else if (streaming.nombre == "All Movies")
+									{
+										añadir = false;
+									}
 
-                                    if (repetidos.Count > 0)
-                                    {
-                                        foreach (string repetido in repetidos)
-                                        {
-                                            if (repetido == streaming.nombre)
-                                            {
-                                                añadir = false;
-                                                break;
-                                            }
-                                        }
-                                    }
+									if (repetidos.Count > 0)
+									{
+										foreach (string repetido in repetidos)
+										{
+											if (repetido == streaming.nombre)
+											{
+												añadir = false;
+												break;
+											}
+										}
+									}
 
-                                    if (añadir == true)
-                                    {
-                                        repetidos.Add(streaming.nombre);
+									if (añadir == true)
+									{
+										repetidos.Add(streaming.nombre);
 
-                                        int int3 = html.IndexOf("<meta property=" + Strings.ChrW(34) + "og:image" + Strings.ChrW(34));
-                                        string temp3 = html.Remove(0, int3);
+										int int3 = html.IndexOf("<meta property=" + Strings.ChrW(34) + "og:image" + Strings.ChrW(34));
+										string temp3 = html.Remove(0, int3);
 
-                                        int int4 = temp3.IndexOf("content=");
-                                        string temp4 = temp3.Remove(0, int4 + 9);
+										int int4 = temp3.IndexOf("content=");
+										string temp4 = temp3.Remove(0, int4 + 9);
 
-                                        int int5 = temp4.IndexOf(Strings.ChrW(34));
-                                        string temp5 = temp4.Remove(int5, temp4.Length - int5);
+										int int5 = temp4.IndexOf(Strings.ChrW(34));
+										string temp5 = temp4.Remove(int5, temp4.Length - int5);
 
-                                        if (temp5.Contains("scale?width") == true)
-                                        {
-                                            int int10 = temp5.IndexOf("scale?width");
-                                            temp5 = temp5.Remove(int10, temp5.Length - int10);
-                                        }
+										if (temp5.Contains("scale?width") == true)
+										{
+											int int10 = temp5.IndexOf("scale?width");
+											temp5 = temp5.Remove(int10, temp5.Length - int10);
+										}
 
-                                        streaming.imagenPequeña = temp5.Trim();
+										streaming.imagenPequeña = temp5.Trim();
 
-                                        int int6 = html.IndexOf("<meta name=" + Strings.ChrW(34) + "twitter:image" + Strings.ChrW(34));
-                                        string temp6 = html.Remove(0, int6);
+										int int6 = html.IndexOf("<meta property=" + Strings.ChrW(34) + "twitter:image" + Strings.ChrW(34));
+										string temp6 = html.Remove(0, int6);
 
-                                        int int7 = temp6.IndexOf("content=");
-                                        string temp7 = temp6.Remove(0, int7 + 9);
+										int int7 = temp6.IndexOf("content=");
+										string temp7 = temp6.Remove(0, int7 + 9);
 
-                                        int int8 = temp7.IndexOf(Strings.ChrW(34));
-                                        string temp8 = temp7.Remove(int8, temp7.Length - int8);
+										int int8 = temp7.IndexOf(Strings.ChrW(34));
+										string temp8 = temp7.Remove(int8, temp7.Length - int8);
 
-                                        if (temp8.Contains("scale?width") == true)
-                                        {
-                                            int int11 = temp8.IndexOf("scale?width");
-                                            temp8 = temp8.Remove(int11, temp8.Length - int11);
-                                        }
+										if (temp8.Contains("scale?width") == true)
+										{
+											int int11 = temp8.IndexOf("scale?width");
+											temp8 = temp8.Remove(int11, temp8.Length - int11);
+										}
 
-                                        streaming.imagenMedianayGrande = temp8.Trim();
+										streaming.imagenMedianayGrande = temp8.Trim();
 
-                                        streaming.enlace = resultado;
+										streaming.enlace = resultado;
 
-                                        ImageEx imagen = new ImageEx
-                                        {
-                                            IsCacheEnabled = true,
-                                            EnableLazyLoading = true,
-                                            Stretch = Stretch.UniformToFill,
-                                            Source = streaming.imagenPequeña,
-                                            CornerRadius = new CornerRadius(2)
-                                        };
+										ImageEx imagen = new ImageEx
+										{
+											IsCacheEnabled = true,
+											EnableLazyLoading = true,
+											Stretch = Stretch.UniformToFill,
+											Source = streaming.imagenPequeña,
+											CornerRadius = new CornerRadius(2)
+										};
 
-                                        Button2 botonItem = new Button2
-                                        {
-                                            Content = imagen,
-                                            Margin = new Thickness(0),
-                                            Padding = new Thickness(0),
-                                            BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
-                                            BorderThickness = new Thickness(2),
-                                            Tag = streaming,
-                                            MaxWidth = 350,
-                                            CornerRadius = new CornerRadius(5)
-                                        };
+										Button2 botonItem = new Button2
+										{
+											Content = imagen,
+											Margin = new Thickness(0),
+											Padding = new Thickness(0),
+											BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
+											BorderThickness = new Thickness(2),
+											Tag = streaming,
+											MaxWidth = 350,
+											CornerRadius = new CornerRadius(5)
+										};
 
-                                        botonItem.Click += ImagenItemClick;
-                                        botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
-                                        botonItem.PointerExited += Animaciones.SaleRatonBoton2;
+										botonItem.Click += ImagenItemClick;
+										botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
+										botonItem.PointerExited += Animaciones.SaleRatonBoton2;
 
-                                        TextBlock tbTt = new TextBlock
-                                        {
-                                            Text = streaming.nombre
-                                        };
+										TextBlock tbTt = new TextBlock
+										{
+											Text = streaming.nombre
+										};
 
-                                        ToolTipService.SetToolTip(botonItem, tbTt);
-                                        ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
+										ToolTipService.SetToolTip(botonItem, tbTt);
+										ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
 
-                                        GridViewItem item = new GridViewItem
-                                        {
-                                            Content = botonItem,
-                                            Margin = new Thickness(5, 0, 5, 10)
-                                        };
+										GridViewItem item = new GridViewItem
+										{
+											Content = botonItem,
+											Margin = new Thickness(5, 0, 5, 10)
+										};
 
-                                        ObjetosVentana.gvDisneyPlusResultados.Items.Add(item);
-                                    }
-                                }
-                            }
+										ObjetosVentana.gvDisneyPlusResultados.Items.Add(item);
+									}
+								}
+							}
                         }
                     }
                 }

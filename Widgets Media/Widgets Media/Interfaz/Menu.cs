@@ -73,47 +73,6 @@ namespace Interfaz
 
             //--------------------------------------------------------------------
 
-            MenuFlyoutItem2 item3 = new MenuFlyoutItem2
-            {
-                Text = recursos.GetString("MenuContact"),
-                Foreground = new SolidColorBrush((Color)Application.Current.Resources["ColorFuente"]),
-                RequestedTheme = ElementTheme.Dark,
-                Margin = new Thickness(-30, 0, 0, 0)
-            };
-
-            item3.Click += BotonAbrirContactar;
-            item3.PointerEntered += Animaciones.EntraRatonMenuFlyoutItem2;
-            item3.PointerExited += Animaciones.SaleRatonMenuFlyoutItem2;
-
-            ObjetosVentana.menuItemMenu.Items.Add(item3);
-
-            MenuFlyoutItem2 item4 = new MenuFlyoutItem2
-            {
-                Text = recursos.GetString("MenuPatchNotes"),
-                Foreground = new SolidColorBrush((Color)Application.Current.Resources["ColorFuente"]),
-                RequestedTheme = ElementTheme.Dark,
-                Margin = new Thickness(-30, 0, 0, 0)
-            };
-
-            item4.Click += BotonAbrirNotasParche;
-            item4.PointerEntered += Animaciones.EntraRatonMenuFlyoutItem2;
-            item4.PointerExited += Animaciones.SaleRatonMenuFlyoutItem2;
-
-            ObjetosVentana.menuItemMenu.Items.Add(item4);
-
-            //--------------------------------------------------------------------
-
-            MenuFlyoutSeparator separador2 = new MenuFlyoutSeparator
-            {
-                Foreground = new SolidColorBrush((Color)Application.Current.Resources["ColorFuente"]),
-                RequestedTheme = ElementTheme.Dark,
-                Height = 30
-            };
-
-            ObjetosVentana.menuItemMenu.Items.Add(separador2);
-
-            //--------------------------------------------------------------------
-
             MenuFlyoutItem2 item5 = new MenuFlyoutItem2
             {
                 Text = "pepeizqapps.com",

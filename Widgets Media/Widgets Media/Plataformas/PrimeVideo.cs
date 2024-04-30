@@ -68,126 +68,154 @@ namespace Plataformas
             }
         }
 
-        private static async void Buscar()
-        {
-            if (ObjetosVentana.tbPrimeVideoBuscar.Text.Trim().Length > 3)
-            {
-                ActivarDesactivar(false);
-                ObjetosVentana.prPrimeVideoResultados.Visibility = Visibility.Visible;
+		private static async void Buscar()
+		{
+			if (ObjetosVentana.tbPrimeVideoBuscar.Text.Trim().Length > 3)
+			{
+				ActivarDesactivar(false);
+				ObjetosVentana.prPrimeVideoResultados.Visibility = Visibility.Visible;
 
-                ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
-                ObjetosVentana.gvPrimeVideoResultados.Items.Clear();
+				ApplicationDataContainer datos = ApplicationData.Current.LocalSettings;
+				ObjetosVentana.gvPrimeVideoResultados.Items.Clear();
 
-                await Task.Delay(100);
+				await Task.Delay(100);
 
-                string html = await Decompiladores.CogerHtml("https://www.primevideo.com/search/ref=atv_nb_sr?phrase=" + ObjetosVentana.tbPrimeVideoBuscar.Text.Trim());
+				string html = await Decompiladores.CogerHtml("https://www.primevideo.com/search/ref=atv_nb_sr?phrase=" + ObjetosVentana.tbPrimeVideoBuscar.Text.Trim());
 
-                if (html != null) 
-                {
-                    int int1 = html.IndexOf("['search-default']");
-                    string temp1 = html.Remove(0, int1);
+				if (html != null)
+				{
+					int int2 = html.IndexOf("<script type=" + Strings.ChrW(34) + "text/template" + Strings.ChrW(34) + ">");
+					string temp2 = html.Remove(0, int2);
 
-                    int int2 = temp1.IndexOf("<script type=" + Strings.ChrW(34) + "text/template" + Strings.ChrW(34) + ">");
-                    string temp2 = temp1.Remove(0, int2);
+					int int3 = temp2.IndexOf(">");
+					string temp3 = temp2.Remove(0, int3 + 1);
 
-                    int int3 = temp2.IndexOf(">");
-                    string temp3 = temp2.Remove(0, int3 + 1);
+					int int4 = temp3.IndexOf("</script>");
+					string temp4 = temp3.Remove(int4, temp3.Length - int4);
 
-                    int int4 = temp3.IndexOf("</script>");
-                    string temp4 = temp3.Remove(int4, temp3.Length - int4);
+					int i = 0;
+					while (i < 40)
+					{
+						if (temp4.Contains(Strings.ChrW(34) + "displayTitle" + Strings.ChrW(34)) == true)
+						{
+							int int5 = temp4.IndexOf(Strings.ChrW(34) + "displayTitle" + Strings.ChrW(34));
+							string temp5 = temp4.Remove(0, int5 + 5);
 
-                    PrimeVideoAPI json = JsonConvert.DeserializeObject<PrimeVideoAPI>(temp4);
+							temp4 = temp5;
 
-                    if (json != null) 
-                    {
-                        foreach (PrimeVideoAPIItem resultado in json.props.resultados.items)
-                        {
-                            PrimeVideoClase streaming = new PrimeVideoClase();
-                            streaming.nombre = resultado.titulo.texto;
+							int int6 = temp5.IndexOf(":");
+							string temp6 = temp5.Remove(0, int6 + 2);
 
-                            string imagen2 = resultado.packshot.imagen.src;
+							int int7 = temp6.IndexOf(Strings.ChrW(34));
+							string temp7 = temp6.Remove(int7, temp6.Length - int7);
 
-                            if (imagen2.Contains("._") == true)
-                            {
-                                int int6 = imagen2.IndexOf("._");
-                                imagen2 = imagen2.Remove(int6, imagen2.Length - int6);
-                                imagen2 = imagen2 + ".jpg";
-                            }
+							string titulo = temp7.Trim();
 
-                            streaming.imagenPequeña = imagen2;
-                            streaming.imagenMedianayGrande = imagen2;
+							int int8 = temp4.IndexOf("{" + Strings.ChrW(34) + "cover" + Strings.ChrW(34) + ":{" + Strings.ChrW(34) + "url" + Strings.ChrW(34));
+							string temp8 = temp4.Remove(0, int8 + 2);
 
-                            string id = resultado.packshot.enlace;
-                            id = id.Replace("/detail/", null);
+							int int9 = temp8.IndexOf("https://");
+							string temp9 = temp8.Remove(0, int9);
 
-                            if (id.Contains("/ref=") == true)
-                            {
-                                int int5 = id.IndexOf("/ref=");
-                                id = id.Remove(int5, id.Length - int5);
-                            }
+							int int10 = temp9.IndexOf(Strings.ChrW(34) + "}");
+							string temp10 = temp9.Remove(int10, temp9.Length - int10);
 
-                            if ((int)datos.Values["OpcionesPrimeVideoModo"] == 0)
-                            {
-                                streaming.enlace = "https://www.primevideo.com/detail/" + id + "/";
-                            }
-                            else if ((int)datos.Values["OpcionesPrimeVideoModo"] == 1)
-                            {
-                                streaming.enlace = "primevideo://app/detail?asin=" + id;
-                            }
+							string imagen = temp10.Trim();
 
-                            ImageEx imagen = new ImageEx
-                            {
-                                IsCacheEnabled = true,
-                                EnableLazyLoading = true,
-                                Stretch = Stretch.UniformToFill,
-                                Source = streaming.imagenMedianayGrande,
-                                CornerRadius = new CornerRadius(2),
-                                Tag = streaming
-                            };
+							int int11 = temp4.IndexOf(Strings.ChrW(34) + "link" + Strings.ChrW(34) + ":{" + Strings.ChrW(34) + "url" + Strings.ChrW(34));
+							string temp11 = temp4.Remove(0, int11 + 2);
 
-                            imagen.ImageExFailed += ImagenFalla;
+							int int12 = temp11.IndexOf("/detail/");
+							string temp12 = temp11.Remove(0, int12);
 
-                            Button2 botonItem = new Button2
-                            {
-                                Content = imagen,
-                                Margin = new Thickness(0),
-                                Padding = new Thickness(0),
-                                BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
-                                BorderThickness = new Thickness(2),
-                                Tag = streaming,
-                                MaxWidth = 350,
-                                CornerRadius = new CornerRadius(5)
-                            };
+							int int13 = temp12.IndexOf(Strings.ChrW(34) + "}");
+							string temp13 = temp12.Remove(int13, temp12.Length - int13);
 
-                            botonItem.Click += ImagenItemClick;
-                            botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
-                            botonItem.PointerExited += Animaciones.SaleRatonBoton2;
+							string enlace = temp13.Trim();
 
-                            TextBlock tbTt = new TextBlock
-                            {
-                                Text = streaming.nombre
-                            };
-              
-                            ToolTipService.SetToolTip(botonItem, tbTt);
-                            ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
+							if (enlace.Contains("ref=") == true)
+							{
+								int int14 = enlace.IndexOf("ref=");
+								enlace = enlace.Remove(int14, enlace.Length - int14);
+							}
 
-                            GridViewItem item = new GridViewItem
-                            {
-                                Content = botonItem,
-                                Margin = new Thickness(5, 0, 5, 10)
-                            };
+							if ((int)datos.Values["OpcionesPrimeVideoModo"] == 0)
+							{
+								enlace = "https://www.primevideo.com" + enlace;
+							}
+							else if ((int)datos.Values["OpcionesPrimeVideoModo"] == 1)
+							{
+								string id = enlace;
 
-                            ObjetosVentana.gvPrimeVideoResultados.Items.Add(item);
-                        }
-                    }
-                }
+								id = id.Replace("/detail/", null);
+								id = id.Replace("/", null);
 
-                ActivarDesactivar(true);
-                ObjetosVentana.prPrimeVideoResultados.Visibility = Visibility.Collapsed;
-            }
-        }
+								enlace = "primevideo://app/detail?asin=" + id;
+							}
 
-        private static void ImagenFalla(object sender, ImageExFailedEventArgs e)
+							PrimeVideoClase tag = new PrimeVideoClase
+							{
+								nombre = titulo,
+								imagenPequeña = imagen,
+								imagenMedianayGrande = imagen,
+								enlace = enlace
+							};
+
+							ImageEx imagen2 = new ImageEx
+							{
+								IsCacheEnabled = true,
+								EnableLazyLoading = true,
+								Stretch = Stretch.UniformToFill,
+								Source = imagen,
+								CornerRadius = new CornerRadius(2),
+								Tag = tag
+							};
+
+							imagen2.ImageExFailed += ImagenFalla;
+
+							Button2 botonItem = new Button2
+							{
+								Content = imagen2,
+								Margin = new Thickness(0),
+								Padding = new Thickness(0),
+								BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ColorPrimario"]),
+								BorderThickness = new Thickness(2),
+								MaxWidth = 350,
+								CornerRadius = new CornerRadius(5),
+								Tag = tag
+							};
+
+							botonItem.Click += ImagenItemClick;
+							botonItem.PointerEntered += Animaciones.EntraRatonBoton2;
+							botonItem.PointerExited += Animaciones.SaleRatonBoton2;
+
+							TextBlock tbTt = new TextBlock
+							{
+								Text = titulo
+							};
+
+							ToolTipService.SetToolTip(botonItem, tbTt);
+							ToolTipService.SetPlacement(botonItem, PlacementMode.Bottom);
+
+							GridViewItem item = new GridViewItem
+							{
+								Content = botonItem,
+								Margin = new Thickness(5, 0, 5, 10)
+							};
+
+							ObjetosVentana.gvPrimeVideoResultados.Items.Add(item);
+						}
+
+						i += 1;
+					}
+				}
+
+				ActivarDesactivar(true);
+				ObjetosVentana.prPrimeVideoResultados.Visibility = Visibility.Collapsed;
+			}
+		}
+
+		private static void ImagenFalla(object sender, ImageExFailedEventArgs e)
         {
             ImageEx imagen = (ImageEx)sender;
             PrimeVideoClase streamingImagen = imagen.Tag as PrimeVideoClase;
